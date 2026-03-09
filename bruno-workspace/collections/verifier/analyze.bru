@@ -1,0 +1,162 @@
+meta {
+  name: analyze
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8000/analyze
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "title": "Jak ovlivňuje členství v EU českou ekonomiku?",
+      "topics": ["EU", "ekonomika"],
+      "blocks": [
+        {
+          "statements": [
+            {
+              "text": "Od vstupu do EU životní úroveň Čechů roste – HDP na obyvatele významně vzrostlo v porovnání s evropským průměrem.",
+              "expected": {
+                "statement_analysis": null
+              },  
+              "sources": [
+                {
+                  "type": "primary",
+                  "name": "Purchasing power parities and GDP per capita – preliminary estimate",
+                  "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=558642",
+                  "archive_url": "https://web.archive.org/web/20250915/https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=558642",
+                  "date": "2025-03-27",
+                  "expected": {
+                    "statement_verification": null
+                  }
+                },
+                {
+                  "type": "primary",
+                  "name": "Vstup do Evropské unie proměnil Česko",
+                  "url": "https://csu.gov.cz/produkty/vstup-do-evropske-unie-promenil-cesko",
+                  "archive_url": "https://web.archive.org/web/20250915/https://csu.gov.cz/produkty/vstup-do-evropske-unie-promenil-cesko",
+                  "date": "2024-04-25",
+                  "expected": {
+                    "statement_verification": null
+                  }
+                },
+                {
+                  "type": "primary",
+                  "name": "Euro a my: Přibližuje se životní úroveň v regionech EU?",
+                  "url": "https://www.cnb.cz/cs/o_cnb/cnblog/Euro-a-my-Priblizuje-se-zivotni-uroven-vregionech-EU",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.cnb.cz/cs/o_cnb/cnblog/Euro-a-my-Priblizuje-se-zivotni-uroven-vregionech-EU",
+                  "date": "2024-07-03",
+                  "expected": {
+                    "statement_verification": null
+                  }
+                },
+                {
+                  "type": "secondary",
+                  "name": "Životní úroveň v Česku je nejvyšší ze zemí V4, v EU pod průměrem",
+                  "url": "https://ct24.ceskatelevize.cz/clanek/ekonomika/zivotni-uroven-v-cesku-je-nejvyssi-ze-zemi-v4-v-eu-pod-prumerem-356390",
+                  "archive_url": "https://web.archive.org/web/20250915/https://ct24.ceskatelevize.cz/clanek/ekonomika/zivotni-uroven-v-cesku-je-nejvyssi-ze-zemi-v4-v-eu-pod-prumerem-356390",
+                  "date": "2024-12-18",
+                  "expected": {
+                    "statement_verification": null
+                  }
+                }
+              ],
+              "emoji": "📈"
+            },
+            {
+              "text": "Vyvíjelo by se české HDP takto i bez EU?",
+              "sources": []
+            }
+          ]
+        },
+        {
+          "statements": [
+            {
+              "text": "Evropské regulace zvyšují náklady o 0,8 % HDP.",
+              "sources": [
+                {
+                  "type": "primary",
+                  "name": "Quantifying the Impact of Red Tape on Investment: A Survey Data Approach",
+                  "url": "https://www.ifo.de/en/cesifo/publications/2023/working-paper/quantifying-impact-red-tape-investment-survey-data-approach",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.ifo.de/en/cesifo/publications/2023/working-paper/quantifying-impact-red-tape-investment-survey-data-approach",
+                  "date": "2023-12-01"
+                }
+              ],
+              "emoji": "💸"
+            },
+            {
+              "text": "Pokud se ale přiblížíme mezinárodním standardům regulací, můžeme naopak získat cca 2 % HDP.",
+              "sources": [
+                {
+                  "type": "primary",
+                  "name": "Europe’s Choice: Policies for Growth and Resilience (IMF speech)",
+                  "url": "https://www.imf.org/en/News/Articles/2024/12/15/sp121624-europes-choice-policies-for-growth-and-resilience",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.imf.org/en/News/Articles/2024/12/15/sp121624-europes-choice-policies-for-growth-and-resilience",
+                  "date": "2024-12-15"
+                },
+                {
+                  "type": "primary",
+                  "name": "COM(2025) 63 final • EUR-Lex/European Commission",
+                  "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52025DC0063",
+                  "archive_url": "https://web.archive.org/web/20250915/https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52025DC0063",
+                  "date": "2025-03-03"
+                }
+              ]
+            },
+            {
+              "text": "Nevyplatí se o něco dražší a složitější výroba, která dlouhodobě chrání lidi, trh i přírodu?",
+              "sources": []
+            }
+          ]
+        },
+        {
+          "statements": [
+            {
+              "text": "Česko získalo z EU více, než do ní zaplatilo.",
+              "sources": [
+                {
+                  "type": "primary",
+                  "name": "Čistá pozice vůči EU dosáhla v pololetí 24 mld. Kč",
+                  "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                  "date": "2025-07-17"
+                }
+              ],
+              "emoji": "😊"
+            },
+            {
+              "text": "Čistý příjem dotací přesahuje bilion korun, průměrně ročně kolem 55 miliard Kč.",
+              "sources": [
+                {
+                  "type": "primary",
+                  "name": "ČR se loni stala bilionovým čistým příjemcem rozpočtu EU",
+                  "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/cr-se-loni-stala-bilionovym-cistym-prije-50304",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/cr-se-loni-stala-bilionovym-cistym-prije-50304",
+                  "date": "2023-02-06"
+                },
+                {
+                  "type": "primary",
+                  "name": "Čistá pozice vůči EU dosáhla v pololetí 24 mld. Kč",
+                  "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                  "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                  "date": "2025-07-17"
+                }
+              ]
+            },
+            {
+              "text": "Které školy, silnice a jiné projekty ve vašem okolí by nevznikly bez evropských fondů?",
+              "sources": []
+            }
+          ]
+        }
+      ]
+    }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

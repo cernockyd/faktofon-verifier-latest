@@ -1,0 +1,12 @@
+opencollection: 1.0.0
+info:
+  name: "faktofon-bruno-workspace"
+  type: workspace
+
+collections:
+  - name: "verifier"
+    path: "collections/verifier"
+
+specs:
+
+docs: ''

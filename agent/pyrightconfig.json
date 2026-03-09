@@ -1,0 +1,10 @@
+{
+  "typeCheckingMode": "recommended",
+  "ignore": ["**/__pycache__"],
+  "reportUnknownVariableType": false,
+  "reportUnknownMemberType": false,
+  "reportMissingTypeStubs": false,
+  "reportAny": false,
+  "reportExplicitAny": false,
+  "reportPrivateImportUsage": false,
+}

@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./agent
+    container_name: verifier-agent
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MLFLOW_TRACKING_URI=http://mlflow:5002
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - mlflow
+    volumes:
+      - ./agent/src:/app/src
+      - ./agent/pyproject.toml:/app/pyproject.toml
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - faktofon-network
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+  redis:
+    image: redis:7-alpine
+    container_name: faktofon-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    networks:
+      - faktofon-network
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.9.0
+    container_name: faktofon-mlflow
+    ports:
+      - "5002:5002"
+    volumes:
+      - mlflow-artifacts:/mlflow/artifacts
+      - mlflow-backend:/mlflow/backend
+    environment:
+      - MLFLOW_SERVER_ALLOWED_HOSTS=*
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:///mlflow/backend/mlflow.db
+      --artifacts-destination /mlflow/artifacts
+      --host 0.0.0.0
+      --port 5002
+    restart: unless-stopped
+    networks:
+      - faktofon-network
+
+volumes:
+  redis-data:
+  mlflow-artifacts:
+  mlflow-backend:
+
+networks:
+  faktofon-network:
+    driver: bridge

@@ -1,0 +1,14 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+mlruns/
+mlruns/.trash/
+.ipynb_checkpoints/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
