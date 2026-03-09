@@ -2,16 +2,11 @@ import { Menu as BaseUiMenu } from "@base-ui/react";
 import * as Menu from "./menu";
 import { useVerifier } from "hooks/verifier-context";
 import { Button } from "./button";
-import { Input } from "./input";
 import {
   ArrowDown,
   ArrowUp,
-  CirclePause,
   EllipsisVertical,
-  Loader,
-  Pause,
   Plus,
-  Sparkle,
   Trash,
 } from "lucide-react";
 import type { CardStatement, Patch } from "schema/verifier";
@@ -170,9 +165,9 @@ export function SourceList({
           </div>
         );
       })}
-      <div className="flex justify-items-start gap-2 pr-6">
+      <div className="flex justify-items-start gap-4 pr-6">
         <Button
-          className="text-sm rounded-lg shrink-0 px-3! h-7! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
+          className="text-sm rounded-lg shrink-0 px-2! h-7! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
           onClick={() =>
             addSource(
               blockId,
@@ -181,12 +176,14 @@ export function SourceList({
             )
           }
         >
-          <Plus className="size-4 mr-1.5 -ml-0.5" /> Nový zdroj
+          <Plus className="size-4 mr-1 -ml-0.5" />
+          Zdroj
         </Button>
         <PromptButton
           isLoading={isLoading}
           onSubmit={(prompt) => recommendSources(statementId)}
           buttonText="Doporučit zdroj"
+          placeholderText="Typ…"
         />
       </div>
       <Menu.Root handle={sourceMenu}>

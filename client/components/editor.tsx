@@ -43,6 +43,8 @@ export function CardEditor() {
     setSelectedPath,
     isBlockSelectedInPathForRendering,
     isStatementSelectedInPathForRendering,
+    addBlock,
+    addStatement,
   } = useVerifier();
 
   return (
@@ -91,13 +93,18 @@ export function CardEditor() {
             <CardEditorBlockList />
           </div>
         )}
-        <div className="flex-1 h-[calc(100vh-45px)] bg-[#ededed] relative overflow-scroll pb-[40vh]">
-          <div className="w-full flex relative flex-col gap-6">
+        <div className="flex-1 h-[calc(100vh-45px)] bg-[#ededed] relative overflow-scroll pb-[40vh] pt-0">
+          <div className="w-full flex relative flex-col gap-8">
             {card.blocks.order.map((blockId, blockIndex) => {
               if (!isBlockSelectedInPathForRendering(blockId, selectedPath))
                 return null;
               return (
-                <div key={blockIndex} className="mb-4">
+                <div
+                  key={blockIndex}
+                  className={clsx("mb-0", {
+                    "border-b border-neutral-300": selectedPath.length == 0,
+                  })}
+                >
                   {selectedPath.length < 4 && (
                     <div className="justify-center flex py-2 relative mb-15">
                       <span className="flex text-[#ededed] text-sm pl-4 pr-3 py-1 bg-neutral-400 rounded-full relative z-20">
@@ -142,39 +149,51 @@ export function CardEditor() {
                       );
                     },
                   )}
-                  <div className="mx-auto max-w-[960px] pl-10">
-                    <div className="flex gap-2 mb-4">
-                      <Button
-                        className="text-sm rounded-lg shrink-0 px-3! h-7! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
-                        onClick={() => {}}
-                      >
-                        <Plus className="size-4 mr-1.5 -ml-0.5" /> Nové tvrzení
-                      </Button>
-                      <PromptButton
-                        isLoading={false}
-                        onSubmit={() => undefined}
-                        buttonText="Navrhnout tvrzení"
-                      />
+                  {selectedPath.length <= 3 && (
+                    <div className="mx-auto max-w-[960px] pr-10 pb-16 pl-10">
+                      <div className="flex gap-5">
+                        <Button
+                          className="text-sm rounded-lg shrink-0 px-3! h-8! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
+                          onClick={() =>
+                            addStatement(
+                              blockId,
+                              card.blocks.record[blockId].statements.order
+                                .length,
+                            )
+                          }
+                        >
+                          <Plus className="size-4 mr-1.5 -ml-0.5" /> Tvrzení
+                        </Button>
+                        <PromptButton
+                          isLoading={false}
+                          onSubmit={() => undefined}
+                          buttonText="Navrhnout tvrzení"
+                          placeholderText="Téma…"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               );
             })}
-            <div>
-              <div className="flex mx-auto max-w-[960px] pl-10 gap-2 mb-4">
-                <Button
-                  className="text-sm rounded-lg shrink-0 px-3! h-7! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
-                  onClick={() => {}}
-                >
-                  <Plus className="size-4 mr-1.5 -ml-0.5" /> Nový blok
-                </Button>
-                <PromptButton
-                  isLoading={false}
-                  onSubmit={() => undefined}
-                  buttonText="Navrhnout blok"
-                />
+            {selectedPath.length == 0 && (
+              <div>
+                <div className="flex mx-auto max-w-[960px] pt-8 pr-10 pl-10 gap-8">
+                  <Button
+                    className="text-sm rounded-lg shrink-0 px-4! h-9! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
+                    onClick={() => addBlock(card.blocks.order.length)}
+                  >
+                    <Plus className="size-5 mr-2 -ml-1" /> Blok
+                  </Button>
+                  <PromptButton
+                    isLoading={false}
+                    onSubmit={() => undefined}
+                    buttonText="Navrhnout blok"
+                    placeholderText="Téma…"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         {showPreviewSidebar && (
