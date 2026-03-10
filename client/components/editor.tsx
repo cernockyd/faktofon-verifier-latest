@@ -18,6 +18,7 @@ import clsx from "clsx";
 import EditorHeader from "./editor-header";
 import { Button } from "./button";
 import { PromptButton } from "./prompt-button";
+import { SourceEditor } from "./source-editor";
 // A helper function to consistently initialize a task list.
 export function initCard(): Card {
   return {
@@ -45,6 +46,7 @@ export function CardEditor() {
     isStatementSelectedInPathForRendering,
     addBlock,
     addStatement,
+    editorViewRef,
   } = useVerifier();
 
   return (
@@ -93,7 +95,10 @@ export function CardEditor() {
             <CardEditorBlockList />
           </div>
         )}
-        <div className="flex-1 h-[calc(100vh-45px)] bg-[#ededed] relative overflow-scroll pb-[40vh] pt-0">
+        <div
+          ref={editorViewRef}
+          className="flex-1 h-[calc(100vh-45px)] bg-[#ededed] relative overflow-scroll pb-[40vh] pt-0"
+        >
           <div className="w-full flex relative flex-col gap-8">
             {card.blocks.order.map((blockId, blockIndex) => {
               if (!isBlockSelectedInPathForRendering(blockId, selectedPath))

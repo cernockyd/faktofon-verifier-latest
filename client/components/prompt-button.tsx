@@ -26,6 +26,7 @@ export function PromptButton({
         ref={inputRef}
         className="h-auto! bg-white placeholder:italic rounded-lg! px-2! w-17! text-sm overflow-hidden transition-all duration-300 focus:bg-white focus:w-full! focus:flex"
         placeholder={placeholderText}
+        autoComplete="off"
       />
 
       <Button
