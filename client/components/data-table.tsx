@@ -106,8 +106,8 @@ export const DataTable = ({
           : tableKeys["status"].format(null)}
       </Collapsible.Trigger>
       {data && (
-        <Collapsible.Panel className="flex [&[hidden]:not([hidden='until-found'])]:hidden h-(--collapsible-panel-height) border-t border-neutral-200 flex-col justify-end overflow-hidden text-sm transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150">
-          <div className="w-full overflow-hidden pt-1 pb-4 bg-neutral-100 text-left text-sm text-neutral-500">
+        <Collapsible.Panel className="flex [&[hidden]:not([hidden='until-found'])]:hidden h-(--collapsible-panel-height) h-max-[500px] overflow-y-scroll border-t border-neutral-200 flex-col justify-end text-sm transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150">
+          <div className="w-full pt-1 h-full pb-4 bg-neutral-100 text-left text-sm text-neutral-500">
             {Object.entries(tableKeys).map(([key]) => {
               if (tableKeys[key].hideTitle) return null;
               return (
