@@ -29,7 +29,7 @@ export function loader({ context }: Route.LoaderArgs) {
   return Response.json({
     ENV: {
       AGENT_URL: process.env.AGENT_URL,
-      SYNC_URL: process.env.SYNC_URL,
+      SYNC_URL: process.env?.SYNC_URL || "wss://sync.automerge.org",
     },
   } as PublicEnv);
 }

@@ -45,8 +45,6 @@ from src.schema import (
 from src.state import OveralState
 from src.utils import new_record_patch
 
-_ = load_dotenv()
-
 enable_git_versioning = os.getenv("ENABLE_GIT_VERSIONING", "false").lower() == "true"
 context = None
 
@@ -392,6 +390,7 @@ async def event_stream(request: AgentCardToolRequest):
 
 
 if __name__ == "__main__":
+    _ = load_dotenv()
     print("Graph.py run")
 
     if "--render" in sys.argv:

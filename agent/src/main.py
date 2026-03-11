@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -7,11 +10,11 @@ from src.graph import event_stream
 # from src.graph_recommendation import event_stream
 from src.schema import AgentCardToolRequest
 
+_ = load_dotenv()
+
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-]
+origins = os.getenv("ALLOW_ORIGINS", "http://localhost:5173").split(",")
 
 app.add_middleware(
     CORSMiddleware,

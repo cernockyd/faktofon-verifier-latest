@@ -1,18 +1,31 @@
 version: "3.8"
 
 services:
-  api:
+  editor:
+    build: ./client
+    container_name: editor
+    ports:
+      - "3000:3000"
+    depends_on:
+      - agent
+    env_file:
+      - ./client/.env
+    environment:
+      - AGENT_URL=${EDITOR_AGENT_URL}
+
+  agent:
     build: ./agent
-    container_name: verifier-agent
+    container_name: agent
     ports:
       - "8000:8000"
     environment:
-      - REDIS_URL=redis://redis:6379
-      - MLFLOW_TRACKING_URI=http://mlflow:5002
+      - ALLOW_ORIGINS=${AGENT_ALLOW_ORIGINS}
+      #  - REDIS_URL=redis://redis:6379
+      - MLFLRUN pnpm fetch
     env_file:
       - .env
     depends_on:
-      - redis
+      #  - redis
       - mlflow
     volumes:
       - ./agent/src:/app/src
@@ -23,17 +36,17 @@ services:
       - faktofon-network
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
-  redis:
-    image: redis:7-alpine
-    container_name: faktofon-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-    command: redis-server --appendonly yes
-    restart: unless-stopped
-    networks:
-      - faktofon-network
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: faktofon-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   command: redis-server --appendonly yes
+  #   restart: unless-stopped
+  #   networks:
+  #     - faktofon-network
 
   mlflow:
     image: ghcr.io/mlflow/mlflow:v3.9.0
@@ -56,9 +69,9 @@ services:
       - faktofon-network
 
 volumes:
-  redis-data:
   mlflow-artifacts:
   mlflow-backend:
+  # redis-data:
 
 networks:
   faktofon-network:
