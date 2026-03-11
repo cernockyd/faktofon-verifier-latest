@@ -199,6 +199,7 @@ export function CardEditor() {
                             statement={statement}
                             statementId={statementId}
                             blockId={blockId}
+                            blockIndex={blockIndex}
                             statementIndex={statementIndex}
                           />
                           <SourceList
