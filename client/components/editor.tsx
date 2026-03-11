@@ -150,14 +150,30 @@ export function CardEditor() {
                     "border-b border-neutral-300": selectedPath.length == 0,
                   })}
                 >
-                  {selectedPath.length < 4 && (
-                    <div className="justify-center flex py-2 relative mb-15">
-                      <span className="flex text-[#ededed] text-sm pl-4 pr-3 py-1 bg-neutral-400 rounded-full relative z-20">
-                        Začátek {blockIndex + 1}. bloku
-                        <ArrowDown className="size-4 mt-0.5 ml-1" />
-                      </span>
+                  <div className="justify-center py-2 flex relative mb-15">
+                    <div className="flex items-center text-neutral-700 text-sm py-1 pl-3 pr-1.5 bg-neutral-300 rounded-full relative z-20">
+                      {(() => {
+                        if (selectedPath.length == 6)
+                          return `Filtrováno tvrzení ${blockIndex + 1}. bloku`;
+                        if (selectedPath.length == 3)
+                          return `Filtrován ${blockIndex + 1}. blok`;
+                        if (selectedPath.length < 3)
+                          return `Začátek ${blockIndex + 1}. bloku`;
+                      })()}
+                      {selectedPath.length < 3 ? (
+                        <div className="p-1 ml-2 rounded-full">
+                          <ArrowDown className="size-4" />
+                        </div>
+                      ) : (
+                        <Button
+                          className="p-0! size-6! ml-2 rounded-full"
+                          onClick={() => setSelectedPath([])}
+                        >
+                          <X className="size-4" />
+                        </Button>
+                      )}
                     </div>
-                  )}
+                  </div>
                   {card.blocks.record[blockId].statements.order.map(
                     (statementId, statementIndex) => {
                       const statement =

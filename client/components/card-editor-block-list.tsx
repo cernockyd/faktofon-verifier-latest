@@ -5,6 +5,7 @@ import { useVerifier } from "hooks/verifier-context";
 import TopicCombobox, { type LabelItem } from "./topic-combobox";
 import React, { useState, type JSX } from "react";
 import { Menu as BaseUiMenu } from "@base-ui/react";
+import TextareaAutosize from "react-textarea-autosize";
 import * as Menu from "./menu";
 
 export type Menus = {
@@ -126,8 +127,8 @@ export function CardEditorBlockList() {
   };
 
   return (
-    <div className="flex flex-col  w-md mb-10">
-      <div className="pl-4 pr-6 pt-4 mb-10">
+    <div className="flex flex-col w-xs xl:w-sm 2xl:w-md mb-10">
+      <div className="pl-4 pr-4 pt-2 2xl:pt-4 mb-6 2xl:mb-10">
         <TopicCombobox
           topicsKey={topicsKey}
           labels={labels}
@@ -141,133 +142,132 @@ export function CardEditorBlockList() {
         return (
           <div
             key={blockIndex}
-            className="group/block pl-4 pb-4 pr-0 hover:pr-0 flex"
+            className="group/block pl-4 pb-4 pr-4 2xl:pr-6 flex"
           >
             <div
               onClick={(e) => {
                 if (e.currentTarget === e.target) setSelectedBlock(blockId);
               }}
               className={
-                "block p-2 bg-white flex-1 rounded-2xl" +
+                "block flex-1 pb-2 rounded-xl" +
                 (isBlockSelectedInPath(blockId, selectedPath)
                   ? " -outline-offset-2 outline-2 outline-neutral-400"
-                  : " bg-white")
+                  : " ")
               }
             >
-              {block.statements.order.map((statementId, statementIndex) => {
-                const statement = block.statements.record[statementId];
-                return (
-                  <div key={statementIndex}>
-                    <div className="flex group/statement">
-                      {statementIndex == 0 && (
-                        <Input
-                          value={statement.emoji}
+              <div className="bg-neutral-300 rounded-full justify-between pl-4 pr-2 items-center flex py-1 pointer-events-none">
+                <span className="text-sm text-neutral-700">
+                  {blockIndex + 1}. Blok
+                </span>
+                <div className="flex items-center">
+                  <Menu.Trigger
+                    payload={{
+                      data: {
+                        blockId,
+                        blockIndex,
+                      },
+                      menu: "block" as const,
+                    }}
+                    id={blockId}
+                    handle={blockMenu}
+                    className="group/trigger pointer-events-auto bg-transparent! px-1.5! h-6!"
+                  >
+                    <Ellipsis className="size-4 hidden group-hover/block:block group-aria-expanded/trigger:block" />
+                    <div className="size-4 block group-hover/block:hidden group-aria-expanded/trigger:hidden"></div>
+                  </Menu.Trigger>
+                </div>
+              </div>
+              <div className="pl-4 pr-2 pb-2 flex flex-col gap-1 mt-2">
+                {block.statements.order.map((statementId, statementIndex) => {
+                  const statement = block.statements.record[statementId];
+                  return (
+                    <div key={statementIndex}>
+                      <div className="flex group/statement">
+                        {statementIndex == 0 && (
+                          <Input
+                            value={statement.emoji}
+                            className={
+                              "max-w-7 pl-0! px-0! text-center pr-0! rounded-full! h-7! py-0 mr-1 text-sm focus:outline-none hover:cursor-default border-none " +
+                              (isStatementSelectedInPath(
+                                blockId,
+                                statementId,
+                                selectedPath,
+                              )
+                                ? "bg-neutral-300 text-neutral-900 border-none"
+                                : "bg-transparent")
+                            }
+                            placeholder="?"
+                            onMouseDownCapture={(e) => {
+                              e.stopPropagation();
+                            }}
+                            onFocus={() =>
+                              setSelectedStatement(blockId, statementId)
+                            }
+                            onChange={(e) =>
+                              updateStatementEmoji(
+                                blockId,
+                                statementId,
+                                e.target.value,
+                              )
+                            }
+                          />
+                        )}
+                        <div
                           className={
-                            "max-w-8 pl-0! text-center pr-0! rounded-full! h-8! mr-1.5 text-sm focus:outline-none hover:cursor-default border-none " +
+                            "text-sm w-full pr-2 flex resize-none focus:outline-none rounded-lg! hover:cursor-default border-none " +
                             (isStatementSelectedInPath(
                               blockId,
                               statementId,
                               selectedPath,
                             )
-                              ? "bg-neutral-200 border-none"
-                              : "bg-white")
+                              ? " bg-neutral-300 text-neutral-900 border-none"
+                              : " bg-trasparent hover:bg-neutral-300/50 text-neutral-600")
                           }
-                          placeholder="?"
-                          onMouseDownCapture={(e) => {
-                            e.stopPropagation();
-                          }}
-                          onFocus={() =>
-                            setSelectedStatement(blockId, statementId)
-                          }
-                          onChange={(e) =>
-                            updateStatementEmoji(
-                              blockId,
-                              statementId,
-                              e.target.value,
-                            )
-                          }
-                        />
-                      )}
-                      <Input
-                        value={statement.text}
-                        placeholder="Tvrzení"
-                        onFocus={() =>
-                          setSelectedStatement(blockId, statementId)
-                        }
-                        autoComplete="off"
-                        className={
-                          "text-sm h-8! px-1.5! focus:outline-none hover:cursor-default border-none " +
-                          (isStatementSelectedInPath(
-                            blockId,
-                            statementId,
-                            selectedPath,
-                          )
-                            ? " bg-neutral-200 text-neutral-900! border-none"
-                            : "bg-white hover:bg-neutral-100")
-                        }
-                        onChange={(e) =>
-                          updateStatementText(
-                            blockId,
-                            statementId,
-                            e.target.value,
-                          )
-                        }
-                      />
-                      <Menu.Trigger
-                        payload={{
-                          data: {
-                            blockId,
-                            blockIndex,
-                            statementId,
-                            statementIndex,
-                          },
-                          menu: "statement" as const,
-                        }}
-                        handle={blockMenu}
-                        className="group/trigger group-hover/statement:flex bg-transparent! h-8! pl-1! pr-0! py-0!"
-                      >
-                        <Ellipsis className="size-4 hidden group-hover/statement:block group-aria-expanded/trigger:block" />
-                        <div className="size-4 block group-hover/statement:hidden group-aria-expanded/trigger:hidden"></div>
-                      </Menu.Trigger>
+                        >
+                          <TextareaAutosize
+                            value={statement.text}
+                            placeholder="Tvrzení"
+                            onFocus={() =>
+                              setSelectedStatement(blockId, statementId)
+                            }
+                            className={
+                              "text-sm w-full py-1 pl-1.5! resize-none focus:outline-none rounded-lg! hover:cursor-default leading-5 border-none"
+                            }
+                            maxRows={5}
+                            onChange={(e) =>
+                              updateStatementText(
+                                blockId,
+                                statementId,
+                                e.target.value,
+                              )
+                            }
+                          />
+                          <Menu.Trigger
+                            payload={{
+                              data: {
+                                blockId,
+                                blockIndex,
+                                statementId,
+                                statementIndex,
+                              },
+                              menu: "statement" as const,
+                            }}
+                            handle={blockMenu}
+                            className="group/trigger group-hover/statement:flex bg-transparent! h-full pl-1! pr-0! py-0!"
+                          >
+                            <Ellipsis className="size-4 hidden group-hover/statement:block group-aria-expanded/trigger:block" />
+                            <div className="size-4 block group-hover/statement:hidden group-aria-expanded/trigger:hidden"></div>
+                          </Menu.Trigger>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-              <Button
-                className="text-sm rounded-lg px-3! h-7! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
-                onClick={() =>
-                  addStatement(blockId, block.statements.order.length)
-                }
-              >
-                <Plus className="size-4 stroke-2 mr-1.5 -ml-0.5" /> Nové tvrzení
-              </Button>
-            </div>
-            <div className="flex items-center">
-              <Menu.Trigger
-                payload={{
-                  data: {
-                    blockId,
-                    blockIndex,
-                  },
-                  menu: "block" as const,
-                }}
-                id={blockId}
-                handle={blockMenu}
-                className="group/trigger bg-transparent! px-1.5! h-6!"
-              >
-                <Ellipsis className="size-4 hidden group-hover/block:block group-aria-expanded/trigger:block" />
-                <div className="size-4 block group-hover/block:hidden group-aria-expanded/trigger:hidden"></div>
-              </Menu.Trigger>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );
       })}
-      <Button
-        className="text-sm rounded-lg ml-5 mr-7 px-3! h-8! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
-        onClick={() => addBlock(card.blocks.order.length)}
-      >
-        <Plus className="size-4 mr-1.5 -ml-0.5" /> Nový blok
-      </Button>
       <Menu.Root handle={blockMenu}>
         {({ payload }) => (
           <Menu.Portal>
