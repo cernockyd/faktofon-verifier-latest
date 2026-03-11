@@ -1,0 +1,1104 @@
+[
+  {
+    "title": "Jak ovlivňuje členství v EU českou ekonomiku?",
+    "topics": ["EU", "ekonomika"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "Od vstupu do EU životní úroveň Čechů roste – HDP na obyvatele významně vzrostlo v porovnání s evropským průměrem.",
+            "expected": {
+              "statement_analysis": null
+            },
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Purchasing power parities and GDP per capita – preliminary estimate",
+                "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=558642",
+                "archive_url": "https://web.archive.org/web/20250915/https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=558642",
+                "date": "2025-03-27",
+                "expected": {
+                  "statement_verification": null
+                }
+              },
+              {
+                "type": "primary",
+                "name": "Vstup do Evropské unie proměnil Česko",
+                "url": "https://csu.gov.cz/produkty/vstup-do-evropske-unie-promenil-cesko",
+                "archive_url": "https://web.archive.org/web/20250915/https://csu.gov.cz/produkty/vstup-do-evropske-unie-promenil-cesko",
+                "date": "2024-04-25",
+                "expected": {
+                  "statement_verification": null
+                }
+              },
+              {
+                "type": "primary",
+                "name": "Euro a my: Přibližuje se životní úroveň v regionech EU?",
+                "url": "https://www.cnb.cz/cs/o_cnb/cnblog/Euro-a-my-Priblizuje-se-zivotni-uroven-vregionech-EU",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.cnb.cz/cs/o_cnb/cnblog/Euro-a-my-Priblizuje-se-zivotni-uroven-vregionech-EU",
+                "date": "2024-07-03",
+                "expected": {
+                  "statement_verification": null
+                }
+              },
+              {
+                "type": "secondary",
+                "name": "Životní úroveň v Česku je nejvyšší ze zemí V4, v EU pod průměrem",
+                "url": "https://ct24.ceskatelevize.cz/clanek/ekonomika/zivotni-uroven-v-cesku-je-nejvyssi-ze-zemi-v4-v-eu-pod-prumerem-356390",
+                "archive_url": "https://web.archive.org/web/20250915/https://ct24.ceskatelevize.cz/clanek/ekonomika/zivotni-uroven-v-cesku-je-nejvyssi-ze-zemi-v4-v-eu-pod-prumerem-356390",
+                "date": "2024-12-18",
+                "expected": {
+                  "statement_verification": null
+                }
+              }
+            ],
+            "emoji": "📈"
+          },
+          {
+            "text": "Vyvíjelo by se české HDP takto i bez EU?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Evropské regulace zvyšují náklady o 0,8 % HDP.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Quantifying the Impact of Red Tape on Investment: A Survey Data Approach",
+                "url": "https://www.ifo.de/en/cesifo/publications/2023/working-paper/quantifying-impact-red-tape-investment-survey-data-approach",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.ifo.de/en/cesifo/publications/2023/working-paper/quantifying-impact-red-tape-investment-survey-data-approach",
+                "date": "2023-12-01"
+              }
+            ],
+            "emoji": "💸"
+          },
+          {
+            "text": "Pokud se ale přiblížíme mezinárodním standardům regulací, můžeme naopak získat cca 2 % HDP.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Europe’s Choice: Policies for Growth and Resilience (IMF speech)",
+                "url": "https://www.imf.org/en/News/Articles/2024/12/15/sp121624-europes-choice-policies-for-growth-and-resilience",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.imf.org/en/News/Articles/2024/12/15/sp121624-europes-choice-policies-for-growth-and-resilience",
+                "date": "2024-12-15"
+              },
+              {
+                "type": "primary",
+                "name": "COM(2025) 63 final • EUR-Lex/European Commission",
+                "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52025DC0063",
+                "archive_url": "https://web.archive.org/web/20250915/https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52025DC0063",
+                "date": "2025-03-03"
+              }
+            ]
+          },
+          {
+            "text": "Nevyplatí se o něco dražší a složitější výroba, která dlouhodobě chrání lidi, trh i přírodu?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Česko získalo z EU více, než do ní zaplatilo.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Čistá pozice vůči EU dosáhla v pololetí 24 mld. Kč",
+                "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                "date": "2025-07-17"
+              }
+            ],
+            "emoji": "😊"
+          },
+          {
+            "text": "Čistý příjem dotací přesahuje bilion korun, průměrně ročně kolem 55 miliard Kč.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČR se loni stala bilionovým čistým příjemcem rozpočtu EU",
+                "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/cr-se-loni-stala-bilionovym-cistym-prije-50304",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/cr-se-loni-stala-bilionovym-cistym-prije-50304",
+                "date": "2023-02-06"
+              },
+              {
+                "type": "primary",
+                "name": "Čistá pozice vůči EU dosáhla v pololetí 24 mld. Kč",
+                "url": "https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                "archive_url": "https://web.archive.org/web/20250915/https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2025/cista-pozice-vuci-eu-dosahla-v-pololeti-24-mld-kc-60434",
+                "date": "2025-07-17"
+              }
+            ]
+          },
+          {
+            "text": "Které školy, silnice a jiné projekty ve vašem okolí by nevznikly bez evropských fondů?",
+            "sources": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Je výhodnější omezit neziskovky?",
+    "topics": ["Neziskovky", "ekonomika"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "Dvě třetiny jejich příjmů nepochází z veřejných zdrojů.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ – Prezentace SUNI 2022",
+                "url": "https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "date": "2024-10-15"
+              }
+            ],
+            "emoji": "💰"
+          },
+          {
+            "text": "Jejich příjem tvoří dary, sbírky, vlastní činnost nebo zahraniční granty.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ – Prezentace SUNI 2022",
+                "url": "https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "date": "2024-10-15"
+              }
+            ]
+          },
+          {
+            "text": "Stát na ně vydává jen cca 1 % svého rozpočtu.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MF ČR – Státní rozpočet 2025 v kostce",
+                "url": "https://www.mfcr.cz/assets/attachments/2025-03-27_Statni-rozpocet-2025-v-kostce.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mfcr.cz/assets/attachments/2025-03-27_Statni-rozpocet-2025-v-kostce.pdf",
+                "date": "2025-03-27"
+              }
+            ]
+          },
+          {
+            "text": "Když bychom tyto peníze dali lidem, každý z nás by dostal asi 2 500 Kč ročně.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MF ČR – Státní rozpočet 2025 v kostce",
+                "url": "https://www.mfcr.cz/assets/attachments/2025-03-27_Statni-rozpocet-2025-v-kostce.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mfcr.cz/assets/attachments/2025-03-27_Statni-rozpocet-2025-v-kostce.pdf",
+                "date": "2025-03-27"
+              },
+              {
+                "type": "primary",
+                "name": "ČSÚ – Pohyb obyvatelstva 4. čtvrtletí 2024",
+                "url": "https://csu.gov.cz/rychle-informace/pohyb-obyvatelstva-4-ctvrtleti-2024",
+                "archive_url": "https://web.archive.org/web/*/https://csu.gov.cz/rychle-informace/pohyb-obyvatelstva-4-ctvrtleti-2024",
+                "date": "2025-04-10"
+              }
+            ]
+          },
+          {
+            "text": "Opravdu by to zlepšilo životy lidí v porovnání se vším, co neziskovky dělají – od sociální péče, přes hasiče až po sportovní kluby?",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ – Prezentace SUNI 2022",
+                "url": "https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://apl.czso.cz/nufile/fdktjr8s/Prezentace_SUNI_2022.pdf",
+                "date": "2024-10-15"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Dobrovolníci z neziskovek odpracovali v r. 2023 přes 36,9 mil. hodin.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ – SUNI přehled (hodiny 2023)",
+                "url": "https://csu.gov.cz/satelitni-ucet-neziskovych-instituci",
+                "archive_url": "https://web.archive.org/web/*/https://csu.gov.cz/satelitni-ucet-neziskovych-instituci",
+                "date": "2025-04-15"
+              }
+            ],
+            "emoji": "🤝"
+          },
+          {
+            "text": "Práci pro společnost v hodnotě přes 8 miliard korun vykonali lidé napříč generacemi.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ – SUNI přehled (ocenění 2023)",
+                "url": "https://csu.gov.cz/satelitni-ucet-neziskovych-instituci",
+                "archive_url": "https://web.archive.org/web/*/https://csu.gov.cz/satelitni-ucet-neziskovych-instituci",
+                "date": "2025-04-15"
+              }
+            ]
+          },
+          {
+            "text": "Je rozumné, aby tato energie přišla vniveč?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Každý z nás si s běžnými věcmi poradí, ale některé problémy jsou větší než jednotlivci.",
+            "sources": [],
+            "emoji": "🏥"
+          },
+          {
+            "text": "Neziskovky proto zajišťují služby, které by si člověk sám často nemohl dovolit a trh je nezajistí – třeba péči v domově pro seniory či azylové domy.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Zákon č. 108/2006 Sb., o sociálních službách",
+                "url": "https://www.zakonyprolidi.cz/cs/2006-108",
+                "archive_url": "https://web.archive.org/web/*/https://www.zakonyprolidi.cz/cs/2006-108",
+                "date": "2025-09-12"
+              }
+            ]
+          },
+          {
+            "text": "Jak by se nám dařilo ve společnosti, kde jsou tyto služby mnohem méně dostupné?",
+            "sources": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Je Ukrajina nacistický stát?",
+    "topics": ["Ukrajina"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "2,15 % Ukrajinců naposledy volilo krajní pravici.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "CEC: Results party lists 2019",
+                "url": "https://www.cvk.gov.ua/pls/vnd2019/wp300pt001f01=919.html",
+                "archive_url": "https://web.archive.org/web//https://www.cvk.gov.ua/pls/vnd2019/wp300pt001f01=919.html",
+                "date": "2019-08-03"
+              },
+              {
+                "type": "secondary",
+                "name": "Українська правда: ЦВК назвала партії…",
+                "url": "https://www.pravda.com.ua/news/2019/08/3/7222696/",
+                "archive_url": "https://web.archive.org/web//https://www.pravda.com.ua/news/2019/08/3/7222696/",
+                "date": "2019-08-03"
+              }
+            ],
+            "emoji": "📊"
+          },
+          {
+            "text": "V Česku v posledních volbách získala skoro 10 %.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Volby.cz (ČSÚ): Volby do PSP 2021",
+                "url": "https://www.volby.cz/pls/ps2021/ps2?xjazyk=CZ",
+                "archive_url": "https://web.archive.org/web//https://www.volby.cz/pls/ps2021/ps2?xjazyk=CZ",
+                "date": "2021-10-09"
+              },
+              {
+                "type": "secondary",
+                "name": "Reuters: Czech far-right…",
+                "url": "https://www.reuters.com/world/europe/czech-far-right-sets-czexit-referendum-law-price-post-vote-talks-2021-09-22/",
+                "archive_url": "https://web.archive.org/web/*/https://www.reuters.com/world/europe/czech-far-right-sets-czexit-referendum-law-price-post-vote-talks-2021-09-22/",
+                "date": "2021-09-22"
+              }
+            ]
+          },
+          {
+            "text": "Jsme nacistický stát?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Část původních členů pluku Azov zřejmě byli extremististé.",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "Reuters: US clears way for Azov",
+                "url": "https://www.reuters.com/world/us-clears-way-ukrainian-military-unit-use-american-weapons-2024-06-11/",
+                "archive_url": "https://web.archive.org/web//https://www.reuters.com/world/us-clears-way-ukrainian-military-unit-use-american-weapons-2024-06-11/",
+                "date": "2024-06-11"
+              },
+              {
+                "type": "secondary",
+                "name": "TIME: Azov & Facebook",
+                "url": "https://time.com/5926750/azov-far-right-movement-facebook/",
+                "archive_url": "https://web.archive.org/web//https://time.com/5926750/azov-far-right-movement-facebook/",
+                "date": "2021-01-07"
+              }
+            ],
+            "emoji": "🪖"
+          },
+          {
+            "text": "Nakolik ale pár stovek vojáků vypovídá o 880 000 členné armádě, kde slouží i Židé, muslimové, Rusové nebo LGBT lidé?",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "TIME: Azov & Facebook",
+                "url": "https://time.com/5926750/azov-far-right-movement-facebook/",
+                "archive_url": "https://web.archive.org/web//https://time.com/5926750/azov-far-right-movement-facebook/",
+                "date": "2021-01-07"
+              },
+              {
+                "type": "secondary",
+                "name": "Al Jazeera: The 300 or so troops of the Azov Battalion…",
+                "url": "https://america.aljazeera.com/articles/2014/7/24/ukraine-azov-battalion.html",
+                "archive_url": "https://web.archive.org/web//https://america.aljazeera.com/articles/2014/7/24/ukraine-azov-battalion.html",
+                "date": "2014-07-24"
+              },
+              {
+                "type": "secondary",
+                "name": "The Kyiv Independent: 880 000 soldiers (Zelensky)",
+                "url": "https://kyivindependent.com/ukraines-military-now-totals-880-000-soldiers-facing-600-000-russian-troops-zelensky-says/",
+                "archive_url": "https://web.archive.org/web//https://kyivindependent.com/ukraines-military-now-totals-880-000-soldiers-facing-600-000-russian-troops-zelensky-says/",
+                "date": "2025-01-15"
+              },
+              {
+                "type": "secondary",
+                "name": "Ukrainska Pravda (ENG): 880 000 soldiers (Zelensky)",
+                "url": "https://www.pravda.com.ua/eng/news/2025/01/15/7493695/",
+                "archive_url": "https://web.archive.org/web//https://www.pravda.com.ua/eng/news/2025/01/15/7493695/",
+                "date": "2025-01-15"
+              },
+              {
+                "type": "secondary",
+                "name": "Times of Israel (JTA): Jewish troops",
+                "url": "https://www.timesofisrael.com/shofars-blown-along-ukraine-frontlines-in-rosh-hashanah-initiative-for-jewish-troops/",
+                "archive_url": "https://web.archive.org/web//https://www.timesofisrael.com/shofars-blown-along-ukraine-frontlines-in-rosh-hashanah-initiative-for-jewish-troops/",
+                "date": "2024-10-03"
+              },
+              {
+                "type": "secondary",
+                "name": "The Jerusalem Post: Jewish chaplains",
+                "url": "https://www.jpost.com/diaspora/article-739926",
+                "archive_url": "https://web.archive.org/web//https://www.jpost.com/diaspora/article-739926",
+                "date": "2023-04-22"
+              },
+              {
+                "type": "secondary",
+                "name": "Reuters: Ukraine’s Muslim Crimea battalion…",
+                "url": "https://www.reuters.com/world/europe/ukraines-muslim-crimea-battalion-yearns-lost-homeland-2022-06-01/",
+                "archive_url": "https://web.archive.org/web//https://www.reuters.com/world/europe/ukraines-muslim-crimea-battalion-yearns-lost-homeland-2022-06-01/",
+                "date": "2022-06-01"
+              },
+              {
+                "type": "secondary",
+                "name": "RFE/RL: Crimean Tatar battalion fighting with UA forces",
+                "url": "https://www.rferl.org/a/ukraine-crimean-tatar-chelebidzhikhan-battalion/32377555.html",
+                "archive_url": "https://web.archive.org/web//https://www.rferl.org/a/ukraine-crimean-tatar-chelebidzhikhan-battalion/32377555.html",
+                "date": "2023-04-24"
+              },
+              {
+                "type": "secondary",
+                "name": "Reuters: Anti-Putin Russian paramilitaries…",
+                "url": "https://www.reuters.com/world/europe/anti-putin-russian-paramilitaries-join-ukraines-fight-kharkiv-region-2024-05-16/",
+                "archive_url": "https://web.archive.org/web//https://www.reuters.com/world/europe/anti-putin-russian-paramilitaries-join-ukraines-fight-kharkiv-region-2024-05-16/",
+                "date": "2024-05-16"
+              },
+              {
+                "type": "secondary",
+                "name": "RFE/RL: Free Russia Legion…",
+                "url": "https://www.rferl.org/a/ukraine-war-free-russian-legion-fighters-against-kremlin/32260682.html",
+                "archive_url": "https://web.archive.org/web//https://www.rferl.org/a/ukraine-war-free-russian-legion-fighters-against-kremlin/32260682.html",
+                "date": "2023-02-03"
+              },
+              {
+                "type": "secondary",
+                "name": "AP News: LGBT Pride/rights in wartime",
+                "url": "https://apnews.com/article/ukraine-russia-lgbt-pride-703de9b80de9d9dd0094235705af7f63",
+                "archive_url": "https://web.archive.org/web//https://apnews.com/article/ukraine-russia-lgbt-pride-703de9b80de9d9dd0094235705af7f63",
+                "date": "2024-06-16"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "️ Zelenský je Žid, kterému nacisté za holokaustu vyvraždili část rodiny.",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "The New York Times: Ukraine’s New President Is Jewish…",
+                "url": "https://www.nytimes.com/2019/04/24/world/europe/volodomyr-zelensky-ukraine-jewish-president.html",
+                "archive_url": "https://web.archive.org/web//https://www.nytimes.com/2019/04/24/world/europe/volodomyr-zelensky-ukraine-jewish-president.html",
+                "date": "2019-04-24"
+              },
+              {
+                "type": "secondary",
+                "name": "Kyiv Post: Zelensky tells own family’s Holocaust story",
+                "url": "https://www.kyivpost.com/post/7008",
+                "archive_url": "https://web.archive.org/web//https://www.kyivpost.com/post/7008",
+                "date": "2020-01-27"
+              },
+              {
+                "type": "secondary",
+                "name": "Times of Israel (JTA): Zelensky gives details about family in Holocaust",
+                "url": "https://www.timesofisrael.com/killed-in-a-fire-zelensky-gives-new-details-about-his-familys-holocaust-history/",
+                "archive_url": "https://web.archive.org/web//https://www.timesofisrael.com/killed-in-a-fire-zelensky-gives-new-details-about-his-familys-holocaust-history/",
+                "date": "2022-03-23"
+              },
+              {
+                "type": "primary",
+                "name": "CNN transcript: Fareed Zakaria GPS interview (Zelensky)",
+                "url": "https://transcripts.cnn.com/show/fzgps/date/2022-03-20/segment/01",
+                "archive_url": "https://web.archive.org/web//https://transcripts.cnn.com/show/fzgps/date/2022-03-20/segment/01",
+                "date": "2022-03-20"
+              }
+            ],
+            "emoji": "✡"
+          },
+          {
+            "text": "Je pravděpodobné, aby vedl nacistický stát?",
+            "sources": []
+          },
+          {
+            "text": "A zvolilo by 73 % 'nacistického národa' židovského vůdce z liberální středové strany?",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "CEC (CVK): Official 2019 Presidential results",
+                "url": "https://www.cvk.gov.ua/pls/vp2019/wp300pt001f01=719.html",
+                "archive_url": "https://web.archive.org/web//https://www.cvk.gov.ua/pls/vp2019/wp300pt001f01=719.html",
+                "date": "2019-04-30"
+              },
+              {
+                "type": "secondary",
+                "name": "IFES Ukraine: CEC confirmed final results",
+                "url": "https://www.ifesukraine.org/en/activity/democratic-elections/czentralna-vyborcha-komisiya-vstanovyla-ostatochni-rezultaty-vyboriv-prezydenta-ukrayiny/",
+                "archive_url": "https://web.archive.org/web//https://www.ifesukraine.org/en/activity/democratic-elections/czentralna-vyborcha-komisiya-vstanovyla-ostatochni-rezultaty-vyboriv-prezydenta-ukrayiny/",
+                "date": "2019-04-30"
+              },
+              {
+                "type": "secondary",
+                "name": "RFE/RL (Радіо Свобода): Ideologické ukotvení Sluha narodu",
+                "url": "https://www.radiosvoboda.org/a/news-sluga-narodu-zyizd-ideologija/30436178.html",
+                "archive_url": "https://web.archive.org/web//https://www.radiosvoboda.org/a/news-sluga-narodu-zyizd-ideologija/30436178.html",
+                "date": "2020-02-15"
+              },
+              {
+                "type": "secondary",
+                "name": "LB.ua: Sluha narodu announced ideology",
+                "url": "https://lb.ua/news/2020/02/15/450007_sluga_naroda_obyavila.html",
+                "archive_url": "https://web.archive.org/web//https://lb.ua/news/2020/02/15/450007_sluga_naroda_obyavila.html",
+                "date": "2020-02-15"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Pomohlo by Česku vystoupit z EU?",
+    "topics": ["EU", "ekonomika"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "Víc než dvě třetiny českého exportu míří do EU.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Eurostat – Intra-EU trade in goods – main features",
+                "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=673892",
+                "archive_url": "https://web.archive.org/web/*/https://ec.europa.eu/eurostat/statistics-explained/index.php?oldid=673892",
+                "date": "2025-05-01"
+              },
+              {
+                "type": "secondary",
+                "name": "TradingEconomics – Share of exports to EU (Eurostat)",
+                "url": "https://tradingeconomics.com/czech-republic/share-of-trade-with-the-eu-share-of-exports-to-eu-eurostat-data.html",
+                "archive_url": "https://web.archive.org/web/*/https://tradingeconomics.com/czech-republic/share-of-trade-with-the-eu-share-of-exports-to-eu-eurostat-data.html",
+                "date": "2025-09-11"
+              }
+            ],
+            "emoji": "📦"
+          },
+          {
+            "text": "Jak by na české firmy dopadla nová cla a bariéry?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Česko je dlouhodobě čistým příjemcem z rozpočtu EU.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "NKÚ – EU REPORT 2024 (CZ)",
+                "url": "https://www.nku.gov.cz/assets/publikace-a-dokumenty/eu-report/eu-report-2024-cz.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.nku.gov.cz/assets/publikace-a-dokumenty/eu-report/eu-report-2024-cz.pdf",
+                "date": "2024-12-18"
+              }
+            ],
+            "emoji": "💶"
+          },
+          {
+            "text": "Dostalo zhruba o 1 bilion Kč víc, než odvedlo.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "NKÚ – EU REPORT 2024 (CZ)",
+                "url": "https://www.nku.gov.cz/assets/publikace-a-dokumenty/eu-report/eu-report-2024-cz.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.nku.gov.cz/assets/publikace-a-dokumenty/eu-report/eu-report-2024-cz.pdf",
+                "date": "2024-12-18"
+              }
+            ]
+          },
+          {
+            "text": "Vyplatilo by se nám se těchto peněz dobrovolně vzdát?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Členství dává lidem volný pohyb za prací, studiem i na dovolenou.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Evropská komise – Free movement and residence",
+                "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/democracy-eu-citizenship-anti-corruption/free-movement-and-residence_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/democracy-eu-citizenship-anti-corruption/free-movement-and-residence_en",
+                "date": "2025-09-11"
+              },
+              {
+                "type": "primary",
+                "name": "DG HOME – Schengen area",
+                "url": "https://home-affairs.ec.europa.eu/policies/schengen/schengen-area_en",
+                "archive_url": "https://web.archive.org/web/*/https://home-affairs.ec.europa.eu/policies/schengen/schengen-area_en",
+                "date": "2025-05-27"
+              }
+            ],
+            "emoji": "🛂"
+          },
+          {
+            "text": "Chceme sami sobě tyto možnosti omezit?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "️ Evropská komise si je vědoma byrokratické náročnosti.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Evropská komise – Simplification and Implementation (Better Regulation)",
+                "url": "https://commission.europa.eu/law/law-making-process/better-regulation/simplification-and-implementation_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/law/law-making-process/better-regulation/simplification-and-implementation_en",
+                "date": "2025-09-11"
+              }
+            ],
+            "emoji": "⚙"
+          },
+          {
+            "text": "Proto si stanovila cíl do konce tohoto mandátu snížit administrativní zátěž vyplývající z pravidel EU o 25 %.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Evropská komise – Simplification (25%/35% cíl)",
+                "url": "https://commission.europa.eu/law/law-making-process/better-regulation/simplification-and-implementation/simplification_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/law/law-making-process/better-regulation/simplification-and-implementation/simplification_en",
+                "date": "2025-09-11"
+              },
+              {
+                "type": "primary",
+                "name": "Evropská komise – News: cut red tape (25%/35%)",
+                "url": "https://commission.europa.eu/news-and-media/news/commission-proposes-cut-red-tape-and-simplify-business-environment-2025-02-26_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/news-and-media/news/commission-proposes-cut-red-tape-and-simplify-business-environment-2025-02-26_en",
+                "date": "2025-02-26"
+              }
+            ]
+          },
+          {
+            "text": "Když i EU aktivně zjednodušuje, opravdu dává větší smysl odejít a její pravidla pak plnit zvenčí?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "🇧 Brexit jako varování. Odchod z EU dlouhodobě snižuje britskou produktivitu asi o 4 %.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "OBR – Brexit analysis",
+                "url": "https://obr.uk/forecasts-in-depth/the-economy-forecast/brexit-analysis/",
+                "archive_url": "https://web.archive.org/web/*/https://obr.uk/forecasts-in-depth/the-economy-forecast/brexit-analysis/",
+                "date": "2025-09-11"
+              },
+              {
+                "type": "primary",
+                "name": "NIESR – Understanding the effects of Brexit on UK productivity",
+                "url": "https://www.cambridge.org/core/journals/national-institute-economic-review/article/abs/understanding-the-effects-of-brexit-on-uk-productivity/76F7F6C0F4CE98CD5300C0EBBBEC2F3A",
+                "archive_url": "https://web.archive.org/web/*/https://www.cambridge.org/core/journals/national-institute-economic-review/article/abs/understanding-the-effects-of-brexit-on-uk-productivity/76F7F6C0F4CE98CD5300C0EBBBEC2F3A",
+                "date": "2025-01-23"
+              }
+            ],
+            "emoji": "🇬"
+          },
+          {
+            "text": "Chceme takové bariéry a náklady přenést na české firmy a zaměstnance?",
+            "sources": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Posílá ČR peníze pro Ukrajinu zbytečně?",
+    "topics": ["Ukrajina", "ekonomika"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "Finanční pomoc se často váže na konkrétní účely.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Factsheets on EU solidarity with Ukraine",
+                "url": "https://commission.europa.eu/publications/factsheets-eu-solidarity-ukraine_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/publications/factsheets-eu-solidarity-ukraine_en",
+                "date": "2025-04-30"
+              },
+              {
+                "type": "primary",
+                "name": "EU humanitarian support to Ukraine",
+                "url": "https://commission.europa.eu/topics/eu-solidarity-ukraine/eu-assistance-ukraine/eu-humanitarian-support-ukraine_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/topics/eu-solidarity-ukraine/eu-assistance-ukraine/eu-humanitarian-support-ukraine_en",
+                "date": "2025-08-27"
+              }
+            ],
+            "emoji": "🤝"
+          },
+          {
+            "text": "Kromě infrastruktury je to odminování zemědělské půdy, kyber-bezpečnost, budování zdravotnických zařízení...",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "EU humanitarian support to Ukraine (mine action & sectors)",
+                "url": "https://commission.europa.eu/topics/eu-solidarity-ukraine/eu-assistance-ukraine/eu-humanitarian-support-ukraine_en",
+                "archive_url": "https://web.archive.org/web/*/https://commission.europa.eu/topics/eu-solidarity-ukraine/eu-assistance-ukraine/eu-humanitarian-support-ukraine_en",
+                "date": "2025-08-27"
+              },
+              {
+                "type": "primary",
+                "name": "Ukraine–EU 3rd Cyber Dialogue (DG CONNECT)",
+                "url": "https://digital-strategy.ec.europa.eu/en/news/ukraine-3rd-cyber-dialogue-european-union-takes-place-brussels",
+                "archive_url": "https://web.archive.org/web/*/https://digital-strategy.ec.europa.eu/en/news/ukraine-3rd-cyber-dialogue-european-union-takes-place-brussels",
+                "date": "2024-06-12"
+              },
+              {
+                "type": "primary",
+                "name": "EU supports social infrastructure (hospitals/schools) – Makariv",
+                "url": "https://www.eeas.europa.eu/delegations/ukraine/new-kindergartens-reconstruction-hospitals-and-schools-%E2%80%93-eu-supports-social_en",
+                "archive_url": "https://web.archive.org/web/*/https://www.eeas.europa.eu/delegations/ukraine/new-kindergartens-reconstruction-hospitals-and-schools-%E2%80%93-eu-supports-social_en",
+                "date": "2023-03-22"
+              }
+            ]
+          },
+          {
+            "text": "Využívány jsou i prostředky financování pomoci z výnosů zmražených ruských aktiv ke krytí splátek a úroků (ULCM).",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "Council: immobilised assets → up to €35bn MFA & loan mechanism",
+                "url": "https://www.consilium.europa.eu/en/press/press-releases/2024/10/09/immobilised-assets-council-agrees-on-up-to-35-billion-in-macro-financial-assistance-to-ukraine-and-new-loan-mechanism-implementing-g7-commitment/",
+                "archive_url": "https://web.archive.org/web/*/https://www.consilium.europa.eu/en/press/press-releases/2024/10/09/immobilised-assets-council-agrees-on-up-to-35-billion-in-macro-financial-assistance-to-ukraine-and-new-loan-mechanism-implementing-g7-commitment/",
+                "date": "2024-10-09"
+              },
+              {
+                "type": "primary",
+                "name": "MoF Ukraine: ULCM (G7 ERA)",
+                "url": "https://mof.gov.ua/en/news/sergii_marchenko_signed_an_agreement_with_the_eu_on_the_ulcm_mechanism_which_will_create_a_legal_framework_for_servicing_and_repayment_of_funds_received_by_ukraine_under_the_g7_era_initiative-4932/",
+                "archive_url": "https://web.archive.org/web/*/https://mof.gov.ua/en/news/sergii_marchenko_signed_an_agreement_with_the_eu_on_the_ulcm_mechanism_which_will_create_a_legal_framework_for_servicing_and_repayment_of_funds_received_by_ukraine_under_the_g7_era_initiative-4932/",
+                "date": "2024-12-05"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "️ Česká podpora míří i na obnovu a civilní projekty.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MV ČR: Pomoc na místě (včetně Ukrajiny)",
+                "url": "https://mv.gov.cz/clanek/odminovani-ci-boj-proti-obchodovani-s-lidmi-cesko-poskytne-dalsi-humanitarni-a-rozvojovou-pomoc-primo-v-krizovych-regionech-vcetne-ukrajiny.aspx",
+                "archive_url": "https://web.archive.org/web/*/https://mv.gov.cz/clanek/odminovani-ci-boj-proti-obchodovani-s-lidmi-cesko-poskytne-dalsi-humanitarni-a-rozvojovou-pomoc-primo-v-krizovych-regionech-vcetne-ukrajiny.aspx",
+                "date": "2025-06-18"
+              },
+              {
+                "type": "primary",
+                "name": "UNOPS: School repairs (EU-funded)",
+                "url": "https://www.unops.org/news-and-stories/news/works-begin-under-eu-funded-project-to-repair-schools-in-ukraine",
+                "archive_url": "https://web.archive.org/web/*/https://www.unops.org/news-and-stories/news/works-begin-under-eu-funded-project-to-repair-schools-in-ukraine",
+                "date": "2025-08-04"
+              }
+            ],
+            "emoji": "🏗"
+          },
+          {
+            "text": "Program „Ukraine 2023–2025“ pomáhá s rekonstrukcí a zapojením firem, škol a obcí.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MZV: Programme for Ukraine 2023–2025 (EN)",
+                "url": "https://mzv.gov.cz/public/7d/4c/e3/5144397_3078225__5134435_3073174_Program_Ukrajina_EN.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://mzv.gov.cz/public/7d/4c/e3/5144397_3078225__5134435_3073174_Program_Ukrajina_EN.pdf",
+                "date": "2022-10-12"
+              },
+              {
+                "type": "primary",
+                "name": "MZV: Program Ukrajina 2023–2025 (CZ)",
+                "url": "https://mzv.gov.cz/file/4808055/Program_Ukrajina.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://mzv.gov.cz/file/4808055/Program_Ukrajina.pdf",
+                "date": "2022-10-21"
+              }
+            ]
+          },
+          {
+            "text": "Pokud nebudou obnoveny například školy, budou mít rodiny s dětmi po válce motivaci k návratu?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "️ Část pomoci tvoří vojenský materiál.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MoD ČR: Declassified details of military aid",
+                "url": "https://www.mo.gov.cz/en/ministry-of-defence/newsroom/news/the-minister-of-defence-informed-about-declassified-details-of-military-aid-to-ukraine-245604/",
+                "archive_url": "https://web.archive.org/web/*/https://www.mo.gov.cz/en/ministry-of-defence/newsroom/news/the-minister-of-defence-informed-about-declassified-details-of-military-aid-to-ukraine-245604/",
+                "date": "2023-02-23"
+              }
+            ],
+            "emoji": "🛡"
+          },
+          {
+            "text": "Ano, jde o zbraně – ale také sem patří munice (včetně té ze zásob AČR), PVO, opravy, díly i výcvik.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MoD/Armáda ČR: Dar munice (152 mm)",
+                "url": "https://mise.mo.gov.cz/informacni-servis/zpravodajstvi/vlada-schvalila-dar-munice-ukrajine-233144/",
+                "archive_url": "https://web.archive.org/web/*/https://mise.mo.gov.cz/informacni-servis/zpravodajstvi/vlada-schvalila-dar-munice-ukrajine-233144/",
+                "date": "2022-01-26"
+              },
+              {
+                "type": "primary",
+                "name": "MoD ČR: Declassified details of military aid",
+                "url": "https://www.mo.gov.cz/en/ministry-of-defence/newsroom/news/the-minister-of-defence-informed-about-declassified-details-of-military-aid-to-ukraine-245604/",
+                "archive_url": "https://web.archive.org/web/*/https://www.mo.gov.cz/en/ministry-of-defence/newsroom/news/the-minister-of-defence-informed-about-declassified-details-of-military-aid-to-ukraine-245604/",
+                "date": "2023-02-23"
+              },
+              {
+                "type": "secondary",
+                "name": "Reuters: Czech aid from army stores",
+                "url": "https://www.reuters.com/world/europe/czech-military-aid-ukraine-army-stores-reaches-288-mln-defence-ministry-says-2024-07-03/",
+                "archive_url": "https://web.archive.org/web/*/https://www.reuters.com/world/europe/czech-military-aid-ukraine-army-stores-reaches-288-mln-defence-ministry-says-2024-07-03/",
+                "date": "2024-07-03"
+              }
+            ]
+          },
+          {
+            "text": "Pokud chceme kratší válku a menší ztráty, dává smysl omezovat právě to, co brání a odrazuje?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "️ Některé výdaje se státu vrací.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV: Pomoc Ukrajině v unikátních datech",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              },
+              {
+                "type": "secondary",
+                "name": "iROZHLAS: Čísla o výdajích/příjmech",
+                "url": "https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "archive_url": "https://web.archive.org/web/*/https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "date": "2025-02-23"
+              }
+            ],
+            "emoji": "⚖"
+          },
+          {
+            "text": "Na humanitární pomoc a podporu běženců jsme poslali přes 63 mld. Kč.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV: Pomoc Ukrajině v unikátních datech",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              },
+              {
+                "type": "secondary",
+                "name": "iROZHLAS: 62,5 mld. výdaje",
+                "url": "https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "archive_url": "https://web.archive.org/web/*/https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "date": "2025-02-23"
+              }
+            ]
+          },
+          {
+            "text": "Ti ale zároveň v Česku pracují a odvádějí daně a odvody: doposud cca 54 miliard.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV: Pomoc Ukrajině v unikátních datech",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              },
+              {
+                "type": "secondary",
+                "name": "iROZHLAS: 55,5 mld. odvody a část daní",
+                "url": "https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "archive_url": "https://web.archive.org/web/*/https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "date": "2025-02-23"
+              }
+            ]
+          },
+          {
+            "text": "A příjmy mají rostoucí trend.",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "iROZHLAS: Trend příjmů vs. výdaje",
+                "url": "https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "archive_url": "https://web.archive.org/web/*/https://www.irozhlas.cz/zpravy-domov/cesko-dalo-na-davky-a-pomoc-uprchlikum-z-ukrajiny-pres-62-miliard-vetsina-penez_2502230720_mst",
+                "date": "2025-02-23"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Podporuje vláda více Ukrajinu než naše lidi?",
+    "topics": ["Ukrajina", "Ekonomika", "Životní úroveň"],
+    "blocks": [
+      {
+        "statements": [
+          {
+            "text": "Pomoc ukrajinským uprchlíkům dosáhla v roce 2024 0,19 % HDP, zatímco sociální výdaje tvoří zhruba 20 % HDP (2022).",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "ČTK/ČeskéNoviny – Souhrn výdajů 2024 (15,5 mld. Kč)",
+                "url": "https://www.ceskenoviny.cz/zpravy/2638103",
+                "archive_url": "https://web.archive.org/web/*/https://www.ceskenoviny.cz/zpravy/2638103",
+                "date": "2025-02-23"
+              },
+              {
+                "type": "primary",
+                "name": "MF ČR – SZAU 2024, sešit B (HDP 2024 = 8 011 mld. Kč)",
+                "url": "https://www.mfcr.cz/assets/attachments/2025-04-28_B-Ekonomicky-vyvoj-a-hospodareni-sektoru-vladnich-instituci.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mfcr.cz/assets/attachments/2025-04-28_B-Ekonomicky-vyvoj-a-hospodareni-sektoru-vladnich-instituci.pdf",
+                "date": "2025-04-28"
+              },
+              {
+                "type": "primary",
+                "name": "ČSÚ – Výdaje na sociální ochranu (ESSPROS, 2022 = 19,9 % HDP)",
+                "url": "https://csu.gov.cz/vydaje-na-socialni-ochranu",
+                "archive_url": "https://web.archive.org/web/*/https://csu.gov.cz/vydaje-na-socialni-ochranu",
+                "date": "2024-11-18"
+              }
+            ],
+            "emoji": "📈"
+          },
+          {
+            "text": "Jen na české důchody šlo přibližně 700 miliard.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "ČSÚ/ČSSZ – Důchody (výdaje 2024: 694,561 mld. Kč)",
+                "url": "https://csu.gov.cz/duchody",
+                "archive_url": "https://web.archive.org/web/*/https://csu.gov.cz/duchody",
+                "date": "2025-06-13"
+              }
+            ]
+          },
+          {
+            "text": "Není právě tohle hlavní podpora „našich lidí“?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "ČR skutečně vydala desítky miliard na pomoc Ukrajincům.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – Bilance 2022–2024 (cca 63 mld. výdaje) – TZ (PDF)",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              }
+            ],
+            "emoji": "💰"
+          },
+          {
+            "text": "Ukrajinci ale zároveň přispívají.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – TZ 21. 5. 2025 (bilance „v plusu“)",
+                "url": "https://www.mpsv.cz/pomoc-ukrajine-v-unikatnich-datech-mpsv-uprchlici-nadale-prispivaji-do-rozpoctu-vic-nez-stat-vydava-na-jejich-celkovou-pomoc",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/pomoc-ukrajine-v-unikatnich-datech-mpsv-uprchlici-nadale-prispivaji-do-rozpoctu-vic-nez-stat-vydava-na-jejich-celkovou-pomoc",
+                "date": "2025-05-21"
+              }
+            ]
+          },
+          {
+            "text": "V letech 2022–2024 vydala ČR 62,5 miliard Kč.",
+            "sources": [
+              {
+                "type": "secondary",
+                "name": "ČTK/ČeskéNoviny – Součet 62,5 mld. do 12/2024",
+                "url": "https://www.ceskenoviny.cz/zpravy/2638103",
+                "archive_url": "https://web.archive.org/web/*/https://www.ceskenoviny.cz/zpravy/2638103",
+                "date": "2025-02-23"
+              },
+              {
+                "type": "primary",
+                "name": "MPSV – Bilance 2022–2024 (cca 63 mld.) – TZ (PDF)",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              }
+            ]
+          },
+          {
+            "text": "Od třetího čtvrtletí 2023 už ale Ukrajinci do rozpočtu přispívají víc, než z něj čerpají.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – bilance (graf; Q3/2023 příjmy>výdaje) – TZ (PDF)",
+                "url": "https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/cms/documents/960141c9-77fe-a2a0-08eb-0935789a6a7e/TZ_bilance_UA_24022025.pdf",
+                "date": "2025-02-24"
+              },
+              {
+                "type": "secondary",
+                "name": "ČTK/ČeskéNoviny – poprvé „v plusu“ ve 3Q 2023",
+                "url": "https://www.ceskenoviny.cz/zpravy/2638103",
+                "archive_url": "https://web.archive.org/web/*/https://www.ceskenoviny.cz/zpravy/2638103",
+                "date": "2025-02-23"
+              }
+            ]
+          },
+          {
+            "text": "Jaký to má dopad na naši ekonomiku, pokud zde většinu peněz utrácejí a platí daně a odvody?",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "statements": [
+          {
+            "text": "Z peněžních dávek mají držitelé dočasné ochrany nárok primárně na humanitární dávku.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – TZ 21. 8. 2025",
+                "url": "https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "date": "2025-08-21"
+              }
+            ],
+            "emoji": "💸"
+          },
+          {
+            "text": "Ta je podmíněna testem příjmu i majetku a příjemců stále ubývá.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – Humanitární dávka (info stránka)",
+                "url": "https://www.mpsv.cz/humanitarni-davka",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/humanitarni-davka",
+                "date": "2025-07-01"
+              },
+              {
+                "type": "primary",
+                "name": "MPSV – TZ 21. 8. 2025 (pokles na ~84 tis.)",
+                "url": "https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "date": "2025-08-21"
+              }
+            ]
+          },
+          {
+            "text": "Naopak přibývá legálně pracujících uprchlíků.",
+            "sources": [
+              {
+                "type": "primary",
+                "name": "MPSV – TZ 21. 5. 2025 (158 800 vztahů v dubnu)",
+                "url": "https://www.mpsv.cz/pomoc-ukrajine-v-unikatnich-datech-mpsv-uprchlici-nadale-prispivaji-do-rozpoctu-vic-nez-stat-vydava-na-jejich-celkovou-pomoc",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/pomoc-ukrajine-v-unikatnich-datech-mpsv-uprchlici-nadale-prispivaji-do-rozpoctu-vic-nez-stat-vydava-na-jejich-celkovou-pomoc",
+                "date": "2025-05-21"
+              },
+              {
+                "type": "primary",
+                "name": "MPSV – TZ 21. 8. 2025 (169 959 vztahů v červenci)",
+                "url": "https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "archive_url": "https://web.archive.org/web/*/https://www.mpsv.cz/potvrzeny-trend-v-datech-mpsv-ukrajinci-dal-odvadeji-statu-vic-nez-kolik-dostavaji-na-pomoci",
+                "date": "2025-08-21"
+              }
+            ]
+          },
+          {
+            "text": "Potkali jste ve svém okolí pracovníky z Ukrajiny?",
+            "sources": []
+          }
+        ]
+      }
+    ]
+  }
+]
