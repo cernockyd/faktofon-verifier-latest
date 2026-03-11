@@ -150,6 +150,10 @@ export const VerifierProvider = ({
     setTopicsKey(topicsKey + 1);
   }, [selectedTopics]);
 
+  useEffect(() => {
+    setSelectedPath([]);
+  }, [docUrl]);
+
   function applyPatchChunk(patches: Patch[]) {
     changeDoc((d) => {
       patches.forEach((patch) => {
