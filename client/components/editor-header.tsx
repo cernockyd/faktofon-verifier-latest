@@ -56,7 +56,7 @@ export default function EditorHeader() {
     >
       <div className="flex items-center w-full relative">
         {!showDocumentSidebar && (
-          <div className="border-r p-1.5 border-neutral-300">
+          <div className="p-1.5">
             <Button
               className={
                 "pointer-events-auto shrink-0 size-8! p-0! rounded-lg border-none hover:bg-neutral-300"
@@ -101,7 +101,7 @@ export default function EditorHeader() {
           <Button
             onClick={(value) => setShowPreviewSidebar(!showPreviewSidebar)}
             className={clsx(
-              "pointer-events-auto shrink-0 size-8! p-0! rounded-lg border-none hover:bg-neutral-200 absolute z-[50] top-[45px] right-0 self-start m-1.5",
+              "pointer-events-auto shrink-0 size-8! p-0! rounded-lg border-none hover:bg-neutral-200 absolute z-[50] top-[45px] -right-2 self-start m-1.5",
             )}
           >
             <Eye className="size-5" />
