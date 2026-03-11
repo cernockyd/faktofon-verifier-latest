@@ -1,63 +1,51 @@
-"""
-To simplify model development this model analyses single proposition + source
-tuple at time.
-"""
-
-import json
 import logging
-import operator
 import os
-import uuid
-from datetime import datetime, timezone
-from typing import Annotated, Any, NotRequired, TypedDict
+import sys
 
 import mlflow
-import pandas as pd
+
+# import pandas as pd
 from dotenv import load_dotenv
 
 # from IPython.display import Image
-from langchain.chat_models import init_chat_model
-from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import Send
-from mlflow.genai import scorer
 
-from src.dataset import Dataset
-from src.prompts import (
-    source_recommendation_prompt_template,
-    source_recommendation_system_prompt,
-    source_verification_prompt_template,
-    source_verification_system_prompt,
-    statement_analysis_system_prompt,
-    statement_verifiability_analysis_prompt_template,
+from src.branches.action_routing_branch import action_routing_branch
+from src.branches.analyze_information_source_branch import (
+    analyze_information_source_branch,
 )
+from src.nodes.aggregate_statement_verification_analysis import (
+    aggregate_statement_verification_analysis,
+)
+from src.nodes.llm_analyse_information_source import (
+    LLMAnalyseInformationSourceOutput,
+    llm_analyse_information_source,
+)
+from src.nodes.llm_analyse_statement_verifiability import (
+    llm_analyse_statement_verifiability,
+)
+from src.nodes.llm_recommend_blocks import (
+    llm_recommend_blocks,
+)
+from src.nodes.llm_recommend_information_source import (
+    llm_recommend_information_source,
+)
+
+# from mlflow.genai import scorer
+# from src.dataset import Dataset
 from src.schema import (
     AgentCardToolRequest,
     Card,
-    CardSource,
-    CardSourceEnhanced,
-    CardStatementEnhanced,
-    InformationSourceRecommendationResult,
-    Message,
+    CardBlock,
+    CardBlockReorderable,
     Patch,
-    SourcesLevelCount,
     SourceVerificationAnalysisResult,
-    SourceVerificationAnalysisResultEnhanced,
     StatementVerifiabilityAnalysisResult,
-    StatementVerifiabilityAnalysisResultEnhanced,
-    StatementVerificationAnalysis,
-    StatementVerificationAnalysisEnhanced,
 )
-from src.utils import format_duration, new_record_patch
-from src.validation import (
-    validate_source_verification,
-    validate_statement_verifiability,
-    validate_statement_verification,
-)
+from src.state import OveralState
+from src.utils import new_record_patch
 
 _ = load_dotenv()
-
-llm_version = "openai:gpt-4.1"
 
 enable_git_versioning = os.getenv("ENABLE_GIT_VERSIONING", "false").lower() == "true"
 context = None
@@ -91,343 +79,18 @@ mlflow.autolog()
 
 logging.basicConfig(level=logging.INFO)
 
-llm = init_chat_model(llm_version)
-
-
-class StatementContext(TypedDict):
-    card_title: str
-    additional_context: list[str]
-
-
-class LLMAnalyseStatmentInput(TypedDict):
-    statement: CardStatementEnhanced
-    statement_context: StatementContext
-
-
-class LLMAnalyseStatmentOutput(TypedDict):
-    statement_context: StatementContext
-    statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResultEnhanced
-    verification_analysis: NotRequired[StatementVerificationAnalysisEnhanced]
-
-
-class LLMVerifyStatmentOutput(TypedDict):
-    statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
-    informational_source: CardSourceEnhanced
-    verification: SourceVerificationAnalysisResultEnhanced
-
-
-class LLMInformationSourceRecommendationOutput(TypedDict):
-    source_id: str
-    statement: CardStatementEnhanced
-    recommended_source: CardSource
-
-
-class OveralState(TypedDict):
-    messages: list[Message]
-    input_card: Card | None
-    verification_list: Annotated[list[LLMVerifyStatmentOutput], operator.add]
-    analysed_statements: Annotated[list[LLMAnalyseStatmentOutput], operator.add]
-    recommended_sources: Annotated[
-        list[LLMInformationSourceRecommendationOutput], operator.add
-    ]
-    statement: CardStatementEnhanced | None
-    verifiability_analysis: StatementVerifiabilityAnalysisResult | None
-    statement_context: StatementContext | None
-    informational_source: CardSourceEnhanced | None
-
 
 def preprocess(state: OveralState):
     """Preprocess the nested input structure into a list of URL and proposition tuples."""
     if state["input_card"] is None:
         logging.info("Preprocessing Skipped")
         return
-    logging.info("Preprocessing")
-    ## return {
-    ##     "preprocess_analysis_input_list": [
-    ##         {"url": url, "proposition": item["proposition"]}
-    ##         for item in state["graph_input"]
-    ##         for url in item["url_list"]
-    ##     ]
-    ## }
+    logging.info("Entering the graph")
     return
 
 
-def action_routing_function(
-    state: OveralState,
-):
-    """Spawn a thread nodes using the Send API."""
-    messages = state["messages"]
-    # get last message
-    last_message = messages[-1]
-    message_part = last_message["parts"][0]
-
-    if message_part["type"] != "action" or message_part["action"] not in [
-        "analyze",
-        "recommend_sources",
-    ]:
-        logging.info("Unknown message")
-        return END
-
-    card = state["input_card"]
-    if card is None:
-        logging.info("Skipped routing")
-        return END
-    logging.info("Routing statements")
-
-    sends: list[Send] = []
-    for block_id in card["blocks"]["record"]:
-        for statement_id in card["blocks"]["record"][block_id]["statements"]["record"]:
-            statement_enhanced = CardStatementEnhanced(
-                **card["blocks"]["record"][block_id]["statements"]["record"][
-                    statement_id
-                ],
-                statement_id=statement_id,
-                block_id=block_id,
-            )
-            statement_context = {
-                "card_title": card["title"],
-                "additional_context": [],
-            }
-            match message_part["action"]:
-                case "analyze":
-                    sends.append(
-                        Send(
-                            "llm_analyse_statement_verifiability",
-                            {
-                                "statement": statement_enhanced,
-                                "statement_context": statement_context,
-                            },
-                        )
-                    )
-                case "recommend_sources":
-                    payload = message_part.get("payload")
-                    if payload is None:
-                        return  # todo: better skip
-                    action_statement_id = payload.get("statement_id", None)
-                    if action_statement_id == statement_id:
-                        sends.append(
-                            Send(
-                                "llm_recommend_information_source",
-                                {
-                                    "statement": statement_enhanced,
-                                    "statement_context": statement_context,
-                                },
-                            )
-                        )
-
-    return sends
-
-
-def llm_analyse_statement_verifiability(
-    state: LLMAnalyseStatmentInput,
-):
-    """
-    A LLM call to analyse a statement's verifiability.
-    This function is also imported and used in the paralell version.
-    """
-    statement = state["statement"]
-    context = state["statement_context"]
-    proposition = statement.get("text")
-
-    logging.info("Analyse Statement LLM call")
-    human_prompt = statement_verifiability_analysis_prompt_template.format(
-        global_proposition_context=context["card_title"],
-        proposition=proposition,
-        additional_context=" ".join(context["additional_context"]),
-    )
-
-    structured_llm = llm.with_structured_output(StatementVerifiabilityAnalysisResult)
-    analysis_res = structured_llm.invoke(
-        [
-            SystemMessage(statement_analysis_system_prompt),
-            HumanMessage(content=human_prompt),
-        ]
-    )
-    assert isinstance(analysis_res, StatementVerifiabilityAnalysisResult)
-
-    status = validate_statement_verifiability(analysis_res)
-
-    analysis_enhanced = StatementVerifiabilityAnalysisResultEnhanced(
-        **analysis_res.model_dump(),
-        status=status,
-    )
-    statement["verifiability_analysis"] = analysis_enhanced
-
-    analysis_output: LLMAnalyseStatmentOutput = {
-        "statement_context": context,
-        "statement": statement,
-        "verifiability_analysis": analysis_enhanced,
-    }
-    return {"analysed_statements": [analysis_output]}
-
-
-def verify_statement_routing_function(
-    state: OveralState | None,
-):
-    """Spawn thread nodes using Send API for each Informational Source based on shared state."""
-    print("\n\nROUTING FUNCTION STATE:")
-    print(state)
-    print("\n\n")
-    if state is None:
-        logging.info("Skipped routing for statement verification due to missing state")
-        return END
-
-    sends: list[Send] = []
-    for statement_analysis_output in state.get("analysed_statements", []):
-        sources = statement_analysis_output["statement"].get("sources", {})
-        for source_id in sources["record"]:
-            source = sources["record"][source_id]
-            sends.append(
-                Send(
-                    "llm_analyse_information_source",
-                    {
-                        "statement": statement_analysis_output["statement"],
-                        "verifiability_analysis": statement_analysis_output[
-                            "verifiability_analysis"
-                        ],
-                        "statement_context": statement_analysis_output[
-                            "statement_context"
-                        ],
-                        "informational_source": CardSourceEnhanced(
-                            **source,
-                            source_id=source_id,
-                            statement_id=statement_analysis_output["statement"][
-                                "statement_id"
-                            ],
-                            block_id=statement_analysis_output["statement"]["block_id"],
-                        ),
-                    },
-                )
-            )
-    if not sends:
-        logging.info("No analysed statements with sources found to verify")
-        return END
-
-    logging.info("Routing to verify statements based on shared analysed_statements")
-    return sends
-
-
-class LLMRecommendInformationSourceInput(TypedDict):
-    statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
-    statement_context: StatementContext
-
-
-def llm_recommend_information_source(state: LLMRecommendInformationSourceInput):
-    """
-    LLM call to propose information source.
-    """
-    statement = state["statement"]
-    verifiability_analysis = statement.get("verifiability_analysis", None)
-    context = state["statement_context"]
-    logging.info("Thread LLM call to recommend information source")
-
-    now_utc = datetime.now(timezone.utc)
-
-    recommendation_prompt = source_recommendation_prompt_template.format(
-        global_proposition_context=context["card_title"],
-        current_date=now_utc.strftime("%Y-%m-%d"),
-        proposition_timeframe=format_duration(
-            verifiability_analysis.proposition_timeframe
-        )
-        if verifiability_analysis is not None
-        and verifiability_analysis.proposition_timeframe
-        else "not specified",
-        proposition=statement["text"],
-        additional_context=" ".join(context["additional_context"]),
-    )
-    structured_llm = llm.with_structured_output(InformationSourceRecommendationResult)
-    recommendation_res = structured_llm.invoke(
-        [
-            SystemMessage(source_recommendation_system_prompt),
-            HumanMessage(content=recommendation_prompt),
-        ]
-    )
-
-    assert isinstance(recommendation_res, InformationSourceRecommendationResult)
-
-    logging.info("\n\nrecommended_source", recommendation_res)
-
-    recommendation_output: LLMInformationSourceRecommendationOutput = {
-        "source_id": str(uuid.uuid4()),
-        "statement": statement,
-        "recommended_source": {
-            "type": recommendation_res.source_level,
-            "name": recommendation_res.name,
-            "url": recommendation_res.url,
-            "archive_url": None,
-            "date": None,
-            "author_type": "agent",
-        },
-    }
-
-    return {"recommended_sources": [recommendation_output]}
-
-
-class LLMVerifyStatmentInput(TypedDict):
-    statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
-    statement_context: StatementContext
-    informational_source: CardSourceEnhanced
-
-
-def llm_analyse_information_source(state: LLMVerifyStatmentInput):
-    """
-    A LLM call to verify a proposition using a selected informational source.
-    """
-    statement = state["statement"]
-    verifiability_analysis = state["verifiability_analysis"]
-    context = state["statement_context"]
-    info_source = state["informational_source"]
-    logging.info("Thread LLM call to verify statement")
-
-    now_utc = datetime.now(timezone.utc)
-    # timeframe_since = get_date_before_duration(now_utc, analysis.proposition_timeframe)
-
-    human_prompt = source_verification_prompt_template.format(
-        global_proposition_context=context["card_title"],
-        # get current date and format it
-        current_date=now_utc.strftime("%Y-%m-%d"),
-        # format if not None
-        proposition_timeframe=format_duration(
-            verifiability_analysis.proposition_timeframe
-        )
-        if verifiability_analysis.proposition_timeframe
-        else "not specified",
-        proposition=statement["text"],
-        additional_context=" ".join(context["additional_context"]),
-        source_url=info_source["url"],
-    )
-    structured_llm = llm.with_structured_output(SourceVerificationAnalysisResult)
-    verification_res = structured_llm.invoke(
-        [
-            SystemMessage(source_verification_system_prompt),
-            HumanMessage(content=human_prompt),
-        ]
-    )
-
-    assert isinstance(verification_res, SourceVerificationAnalysisResult)
-
-    status = validate_source_verification(verification_res)
-
-    verification_enhanced = SourceVerificationAnalysisResultEnhanced(
-        **verification_res.model_dump(),
-        status=status,
-    )
-
-    verification_output: LLMVerifyStatmentOutput = {
-        "statement": statement,
-        "verifiability_analysis": state["verifiability_analysis"],
-        "informational_source": info_source,
-        "verification": verification_enhanced,
-    }
-    return {"verification_list": [verification_output]}
-
-
 def reconstruct_verified_card(
-    original_card: Card, verification_list: list[LLMVerifyStatmentOutput]
+    original_card: Card, verification_list: list[LLMAnalyseInformationSourceOutput]
 ) -> Card:
     import copy
 
@@ -494,49 +157,8 @@ def aggregate_recommend_information_sources(state: OveralState):
     return state
 
 
-def aggregate_statement_verification_analysis(state: OveralState):
-    logging.info("Aggregating verifications")
-
-    statement_statistics: dict[str, SourcesLevelCount] = {}
-
-    # collect statement statistics
-    for verification in state["verification_list"]:
-        statement_id = verification["informational_source"]["statement_id"]
-        if statement_id not in statement_statistics:
-            # init
-            statement_statistics[statement_id] = {
-                "primary": 0,
-                "secondary": 0,
-                "terciary": 0,
-            }
-        # increment
-        statement_statistics[statement_id][
-            verification["verification"].source_level
-        ] += 1
-
-    # update analysed statements with statement statistics
-    for statement in state["analysed_statements"]:
-        statement_id = statement["statement"]["statement_id"]
-
-        statement_verification: StatementVerificationAnalysis = {
-            "sources_statistics": {
-                "primary": 0,
-                "secondary": 0,
-                "terciary": 0,
-            }
-        }
-        if statement_id in statement_statistics:
-            statement_verification["sources_statistics"] = statement_statistics[
-                statement_id
-            ]
-
-        status = validate_statement_verification(statement_verification)
-
-        statement["verification_analysis"] = StatementVerificationAnalysisEnhanced(
-            **statement_verification,
-            status=status,
-        )
-
+def aggregate_recommend_blocks(state: OveralState):
+    logging.info("Aggregating recommended blocks")
     return state
 
 
@@ -548,6 +170,7 @@ def print_ver(state: OveralState):
 
 graph_builder = StateGraph(OveralState)
 
+# nodes
 _ = graph_builder.add_node("preprocess", preprocess)
 _ = graph_builder.add_node(
     "llm_analyse_statement_verifiability", llm_analyse_statement_verifiability
@@ -558,9 +181,16 @@ _ = graph_builder.add_node(
 _ = graph_builder.add_node(
     "llm_recommend_information_source", llm_recommend_information_source
 )
+
+_ = graph_builder.add_node("llm_recommend_blocks", llm_recommend_blocks)
+
 _ = graph_builder.add_node(
     "aggregate_recommend_information_sources",
     aggregate_recommend_information_sources,
+)
+_ = graph_builder.add_node(
+    "aggregate_recommend_blocks",
+    aggregate_recommend_blocks,
 )
 _ = graph_builder.add_node(
     "aggregate_statement_verification_analysis",
@@ -568,11 +198,14 @@ _ = graph_builder.add_node(
 )
 _ = graph_builder.add_node("print_ver", print_ver)
 
+# edges
 _ = graph_builder.add_edge(START, "preprocess")
-_ = graph_builder.add_conditional_edges("preprocess", action_routing_function)
+_ = graph_builder.add_conditional_edges("preprocess", action_routing_branch)
 _ = graph_builder.add_conditional_edges(
-    "llm_analyse_statement_verifiability", verify_statement_routing_function
+    "llm_analyse_statement_verifiability", analyze_information_source_branch
 )
+_ = graph_builder.add_edge("llm_recommend_blocks", "aggregate_recommend_blocks")
+_ = graph_builder.add_edge("aggregate_recommend_blocks", END)
 _ = graph_builder.add_edge(
     "llm_recommend_information_source", "aggregate_recommend_information_sources"
 )
@@ -613,6 +246,7 @@ def predict_fn(item: Card) -> Card:
             "verification_list": [],
             "recommended_sources": [],
             "analysed_statements": [],
+            "recommended_blocks": [],
             "statement": None,
             "verifiability_analysis": None,
             "statement_context": None,
@@ -640,6 +274,7 @@ async def event_stream(request: AgentCardToolRequest):
             "verification_list": [],
             "analysed_statements": [],
             "recommended_sources": [],
+            "recommended_blocks": [],
             "statement": None,
             "verifiability_analysis": None,
             "statement_context": None,
@@ -738,46 +373,68 @@ async def event_stream(request: AgentCardToolRequest):
                 )
                 yield f"[{patch.model_dump_json()}]\n"
 
+        if "llm_recommend_blocks" in keys:
+            aggregation_level_output = update["llm_recommend_blocks"][
+                "recommended_blocks"
+            ][0]
+            blocks: CardBlockReorderable = aggregation_level_output["blocks"]
+
+            for block_id in blocks["order"]:
+                block = blocks["record"][block_id]
+                patch = new_record_patch(
+                    [
+                        "blocks",
+                    ],
+                    block_id,
+                    block,
+                )
+                yield f"[{patch[0].model_dump_json()}, {patch[1].model_dump_json()}]\n"
+
 
 if __name__ == "__main__":
-    img = graph.get_graph().draw_mermaid_png()
+    print("Graph.py run")
 
-    with open("graph.png", "wb") as f:
-        _ = f.write(img)
+    if "--render" in sys.argv:
+        print("Rendering")
+        img = graph.get_graph().draw_mermaid_png()
+        with open("graph.png", "wb") as f:
+            f.write(img)
+    else:
+        print("Skipping rendering. Use --render to generate the image.")
 
-    dataset = Dataset()
-    eval_dataset = dataset.get_data()
+    # dataset = Dataset()
+    # eval_dataset = dataset.get_data()
 
-    data = list(
-        {
-            "inputs": {"item": item},
-            "expectations": {
-                "expected_response": {
-                    "title": item["title"],
-                }
-            },
-        }
-        for item in eval_dataset
-    )
+    # data = list(
+    #     {
+    #         "inputs": {"item": item},
+    #         "expectations": {
+    #             "expected_response": {
+    #                 "title": item["title"],
+    #             }
+    #         },
+    #     }
+    #     for item in eval_dataset
+    # )
 
-    @scorer
-    def matches(outputs: SourceVerificationAnalysisResult, expectations: Any) -> bool:
-        """
-        Evaluate if the output matches expected value.
-        """
-        expected = expectations["expected_response"]
-        # print("\n\n\noutputs:", outputs)
-        # print("\n\n\nexpectations:", expectations)
-        return json.dumps(outputs, sort_keys=True) == json.dumps(
-            expected, sort_keys=True
-        )
+    # @scorer
+    # def matches(outputs: SourceVerificationAnalysisResult, expectations: Any) -> bool:
+    #     """
+    #     Evaluate if the output matches expected value.
+    #     """
+    #     expected = expectations["expected_response"]
+    #     # print("\n\n\noutputs:", outputs)
+    #     # print("\n\n\nexpectations:", expectations)
+    #     return json.dumps(outputs, sort_keys=True) == json.dumps(
+    #         expected, sort_keys=True
+    #     )
 
-    scorers = [matches]
+    # scorers = [matches]
 
-    print(len(data[1:2]))
+    # print(len(data[1:2]))
 
-    results = mlflow.genai.evaluate(
-        data=pd.DataFrame(data[1:2]),
-        predict_fn=predict_fn,
-        scorers=scorers,
-    )
+    # results = mlflow.genai.evaluate(
+    #     data=pd.DataFrame(data[1:2]),
+    #     predict_fn=predict_fn,
+    #     scorers=scorers,
+    # )

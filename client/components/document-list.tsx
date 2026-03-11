@@ -18,6 +18,7 @@ import {
 } from "schema/verifier";
 import { v4 as uuidv4 } from "uuid";
 import type { ZodType } from "zod";
+import examples from "original-examples.json";
 
 export type Menus = {
   document: Menu.MenuItemDefinition<DocumentMenuPayload>[];
@@ -79,12 +80,6 @@ function naiveCardToCard(naive: NaiveCard): Card {
       })),
     ),
   };
-
-  // desired blocks
-  // {
-  //   order: [],
-  //   record: {}
-  // }
 }
 
 export const DocumentList: React.FC<{
@@ -97,11 +92,10 @@ export const DocumentList: React.FC<{
   const [doc, changeDoc] = useDocument<RootDocument>(docUrl, {
     suspense: true,
   });
-  const [text, setText] = useState("");
 
   useEffect(() => {
     changeDoc((d) => {
-      if (selectedDocument && !d.cards.includes(selectedDocument)) {
+      if (selectedDocument != null && !d.cards.includes(selectedDocument)) {
         // If the selected document is not in the list, add it
         d.cards.push(selectedDocument);
       }
@@ -163,6 +157,27 @@ export const DocumentList: React.FC<{
     }
   };
 
+  const handleExampleSelect = async (index: string) => {
+    try {
+      const validatedData = await NaiveCardSchema.safeParseAsync(
+        examples[parseInt(index)],
+      );
+      if (!validatedData.success) {
+        console.error(validatedData.error);
+        throw new Error("Error parsing the imported card.");
+      }
+      console.info("NEW CARD Parsed", validatedData.data);
+      console.log("old card topics", validatedData.data.topics);
+      const newCard = naiveCardToCard(validatedData.data);
+      console.log("new card topics", newCard.topics);
+      const card = repo.create(newCard);
+      changeDoc((d) => d.cards.unshift(card.url));
+      onSelectDocument(card.url);
+    } catch (err) {
+      console.error("Failed to import:", err);
+    }
+  };
+
   const MENUS = {
     document: [
       {
@@ -202,6 +217,27 @@ export const DocumentList: React.FC<{
         <Import className="size-4 mr-2" />
         Importovat ze schránky
       </Button>
+
+      <select
+        name="examples"
+        value=""
+        onChange={(e) => {
+          const value = e.target.value;
+          if (!value) return;
+          handleExampleSelect(value);
+          e.target.blur();
+        }}
+        className="text-sm h-9 justify-start rounded-xl px-2 focus-visible:-outline-offset-1 focus:outline-2 focus:outline-neutral-700 font-normal active:outline-none bg-transparent leading-tight border-none hover:bg-neutral-200 active:bg-neutral-300 active:shadow-none appearance-none"
+      >
+        <option key={-1} value="" disabled hidden>
+          Vybrat z příkladů
+        </option>
+        {examples.map((example, exampleIndex) => (
+          <option key={exampleIndex} value={exampleIndex}>
+            {example.title}
+          </option>
+        ))}
+      </select>
       <p className="text-sm text-neutral-500 mb-3 pt-8 pl-2">Karty</p>
       <ul className="list-none w-full flex flex-col flex-1">
         {doc.cards.map((docUrl, i) => (

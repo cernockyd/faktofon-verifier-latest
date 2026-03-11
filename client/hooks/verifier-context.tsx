@@ -5,6 +5,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { useSearchParams } from "react-router";
@@ -109,6 +110,7 @@ type VerifierContextType = {
     sourceId: string,
     type: string | null,
   ) => void;
+  editorViewRef: React.RefObject<HTMLDivElement | null>;
 };
 
 const VerifierContext = createContext<VerifierContextType | undefined>(
@@ -138,6 +140,8 @@ export const VerifierProvider = ({
   );
   const [topicsKey, setTopicsKey] = useState<number>(1);
 
+  const editorViewRef = useRef<HTMLDivElement | null>(null);
+
   // I know this is gross
   useEffect(() => {
     changeDoc((d) => {
@@ -145,6 +149,10 @@ export const VerifierProvider = ({
     });
     setTopicsKey(topicsKey + 1);
   }, [selectedTopics]);
+
+  useEffect(() => {
+    setSelectedPath([]);
+  }, [docUrl]);
 
   function applyPatchChunk(patches: Patch[]) {
     changeDoc((d) => {
@@ -173,6 +181,7 @@ export const VerifierProvider = ({
   const showCardSidebar = searchParams.get("cs") === "1";
 
   function setSelectedPath(path: string[]) {
+    editorViewRef.current?.scrollTo(0, 0);
     setSearchParams((searchParams) => {
       searchParams.delete("p");
       path.forEach((p) => searchParams.append("p", p));
@@ -518,6 +527,7 @@ export const VerifierProvider = ({
         reorderStatement,
         reorderBlock,
         reorderSource,
+        editorViewRef,
       }}
     >
       {children}

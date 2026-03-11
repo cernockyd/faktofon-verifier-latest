@@ -155,7 +155,7 @@ export default function TopicCombobox({
             Témata
           </label>
           <Combobox.Chips
-            className="flex flex-wrap items-center gap-1 rounded-xl bg-white focus-within:bg-white px-1.5 py-1 focus-within:outline-2 focus-within:-outline-offset-1 focus-within:outline-neutral-400 w-full"
+            className="flex flex-wrap items-center gap-1 rounded-xl hover:bg-white focus-within:bg-white px-1.5 py-1 focus-within:outline-2 focus-within:-outline-offset-1 focus-within:outline-neutral-400 w-full"
             ref={containerRef}
           >
             <Combobox.Value>

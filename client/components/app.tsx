@@ -22,7 +22,7 @@ function App({ docUrl }: { docUrl: AutomergeUrl }) {
     <div className="flex w-full h-screen">
       {showDocumentSidebar && (
         <div className="flex flex-col bg-neutral-100 border-r border-neutral-200">
-          <div className="flex items-center justify-end mb-2 p-1.5 border-b border-neutral-200">
+          <div className="flex items-center justify-end mb-2 p-1.5">
             <div className="font-medium mr-auto ml-3">Verifier</div>
             {selectedDocUrl ? (
               <Toggle
