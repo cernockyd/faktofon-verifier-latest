@@ -61,11 +61,8 @@ export function SourceList({
     },
   });
 
-  useEffect(() => {
-    console.log(error, status);
-  }, [error, status]);
-
-  const recommendSources = (statementId: string) => {
+  const recommendSources = (statementId: string, prompt?: string) => {
+    console.log("recommend source");
     const graphCard = {
       ...card,
       topics: card.topics.map((topic) => topic.value),
@@ -76,7 +73,7 @@ export function SourceList({
           {
             type: "action",
             action: "recommend_sources",
-            payload: { statement_id: statementId },
+            payload: { statement_id: statementId, prompt },
           },
         ],
       },
@@ -181,7 +178,7 @@ export function SourceList({
         </Button>
         <PromptButton
           isLoading={isLoading}
-          onSubmit={(prompt) => recommendSources(statementId)}
+          onSubmit={(prompt) => recommendSources(statementId, prompt)}
           buttonText="Doporučit zdroj"
           placeholderText="Typ…"
         />

@@ -1,0 +1,120 @@
+import logging
+from datetime import datetime, timezone
+from typing import TypedDict
+
+from langchain.chat_models import init_chat_model
+from langchain_core.messages import HumanMessage, SystemMessage
+
+from src.schema import (
+    CardSourceEnhanced,
+    CardStatementEnhanced,
+    SourceVerificationAnalysisResult,
+    SourceVerificationAnalysisResultEnhanced,
+    StatementContext,
+    StatementVerifiabilityAnalysisResult,
+)
+from src.utils import format_duration
+from src.validation import validate_source_verification
+
+llm_version = "openai:gpt-4.1"
+llm = init_chat_model(llm_version)
+
+source_verification_system_prompt = """
+Jsi Strážce faktů a zdrojů. Ověř každé fakt-tvrzení: pravdivost, opora ve zdroji, kvalita zdroje. Styl neřeš. Používej CRAAP (Currency, Relevance, Authority, Accuracy, Purpose).
+
+## Vstupy
+proposition - tvrzení, které je potřeba ověřit na základě přiloženého zdroje
+source - přiložený zdroj
+
+meta (topic, version, author, locale)
+
+## Definice zdrojů
+
+Primární: zákon, oficiální statistiky, tisková zpráva, článek instituce, open-data, vědecká studie.
+
+Sekundární: renomovaná média/agentury, analytika s odkazy na primární.
+
+Terciární: encyklopedie, blogy, přehledy (ne jako důkaz).
+
+## Vstup
+"""
+
+source_verification_prompt_template = """
+Global Proposition Context: {global_proposition_context}
+
+Proposition to verify: {proposition}
+
+Current date: {current_date}
+
+Proposition timeframe: {proposition_timeframe}
+
+Additional context: {additional_context}
+
+Source URL: {source_url}"""
+
+
+class LLMAnalyseInformationSourceInput(TypedDict):
+    statement: CardStatementEnhanced
+    verifiability_analysis: StatementVerifiabilityAnalysisResult
+    statement_context: StatementContext
+    informational_source: CardSourceEnhanced
+
+
+class LLMAnalyseInformationSourceOutput(TypedDict):
+    statement: CardStatementEnhanced
+    verifiability_analysis: StatementVerifiabilityAnalysisResult
+    informational_source: CardSourceEnhanced
+    verification: SourceVerificationAnalysisResultEnhanced
+
+
+def llm_analyse_information_source(state: LLMAnalyseInformationSourceInput):
+    """
+    A LLM call to verify a proposition using a selected informational source.
+    """
+    statement = state["statement"]
+    verifiability_analysis = state["verifiability_analysis"]
+    context = state["statement_context"]
+    info_source = state["informational_source"]
+    logging.info("Thread LLM call to verify statement")
+
+    now_utc = datetime.now(timezone.utc)
+    # timeframe_since = get_date_before_duration(now_utc, analysis.proposition_timeframe)
+
+    human_prompt = source_verification_prompt_template.format(
+        global_proposition_context=context["card_title"],
+        # get current date and format it
+        current_date=now_utc.strftime("%Y-%m-%d"),
+        # format if not None
+        proposition_timeframe=format_duration(
+            verifiability_analysis.proposition_timeframe
+        )
+        if verifiability_analysis.proposition_timeframe
+        else "not specified",
+        proposition=statement["text"],
+        additional_context=" ".join(context["additional_context"]),
+        source_url=info_source["url"],
+    )
+    structured_llm = llm.with_structured_output(SourceVerificationAnalysisResult)
+    verification_res = structured_llm.invoke(
+        [
+            SystemMessage(source_verification_system_prompt),
+            HumanMessage(content=human_prompt),
+        ]
+    )
+
+    assert isinstance(verification_res, SourceVerificationAnalysisResult)
+
+    status = validate_source_verification(verification_res)
+
+    verification_enhanced = SourceVerificationAnalysisResultEnhanced(
+        **verification_res.model_dump(),
+        status=status,
+    )
+
+    verification_output: LLMAnalyseInformationSourceOutput = {
+        "statement": statement,
+        "verifiability_analysis": state["verifiability_analysis"],
+        "informational_source": info_source,
+        "verification": verification_enhanced,
+    }
+    return {"verification_list": [verification_output]}

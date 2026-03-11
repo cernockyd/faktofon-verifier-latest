@@ -1,5 +1,5 @@
 // import "../index.css";
-import type { Card } from "schema/verifier";
+import type { Card, Patch } from "schema/verifier";
 import {
   ArrowDown,
   PanelRightClose,
@@ -7,6 +7,8 @@ import {
   ListIndentDecrease,
   Eye,
   Plus,
+  Cross,
+  X,
 } from "lucide-react";
 import { Toggle } from "./toggle";
 import { useVerifier } from "hooks/verifier-context";
@@ -19,10 +21,11 @@ import EditorHeader from "./editor-header";
 import { Button } from "./button";
 import { PromptButton } from "./prompt-button";
 import { SourceEditor } from "./source-editor";
+import { fetchHttpStream, useAgent } from "lib/stream/hook";
 // A helper function to consistently initialize a task list.
 export function initCard(): Card {
   return {
-    title: `Nepojmenovaná karta`,
+    title: `Karta bez názvu`,
     dateCreated: new Date(),
     dateUpdated: new Date(),
     topics: [],
@@ -47,7 +50,44 @@ export function CardEditor() {
     addBlock,
     addStatement,
     editorViewRef,
+    applyPatchChunk: applyPatch,
   } = useVerifier();
+
+  const { isLoading, error, status, sendToolAction } = useAgent({
+    connection: fetchHttpStream("http://localhost:8000/agent"),
+    onChunk: (chunk) => {
+      console.log("Received chunk:", chunk);
+      applyPatch(chunk as unknown as Patch[]);
+    },
+  });
+
+  const recommendBlocks = ({
+    blocksCount,
+    prompt,
+  }: {
+    blocksCount?: number;
+    prompt?: string;
+  }) => {
+    console.log("Recommend block");
+    const graphCard = {
+      ...card,
+      topics: card.topics.map((topic) => topic.value),
+    };
+    sendToolAction(
+      {
+        content: [
+          {
+            type: "action",
+            action: "recommend_blocks",
+            payload: { prompt, blocks_count: blocksCount },
+          },
+        ],
+      },
+      {
+        card: graphCard,
+      },
+    );
+  };
 
   return (
     <div className="flex-1 min-h-screen bg-[#ededed] relative">
@@ -57,9 +97,9 @@ export function CardEditor() {
         {showCardSidebar && (
           <div
             className={clsx(
-              "flex flex-col h-[calc(100vh-45px)] bg-[#ededed] overflow-scroll border-r",
+              "flex flex-col h-[calc(100vh-45px)] bg-[#ededed] transition-all ease-out duration-300 overflow-scroll border-r",
               {
-                "border-neutral-300": showCardSidebar,
+                "hover:border-neutral-300 border-transparent": showCardSidebar,
                 "border-transparent": !showCardSidebar,
               },
             )}
@@ -191,9 +231,9 @@ export function CardEditor() {
                     <Plus className="size-5 mr-2 -ml-1" /> Blok
                   </Button>
                   <PromptButton
-                    isLoading={false}
-                    onSubmit={() => undefined}
-                    buttonText="Navrhnout blok"
+                    isLoading={isLoading}
+                    onSubmit={(prompt) => recommendBlocks({ prompt })}
+                    buttonText="Navrhnout bloky"
                     placeholderText="Téma…"
                   />
                 </div>

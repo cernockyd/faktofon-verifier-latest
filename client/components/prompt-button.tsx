@@ -9,28 +9,30 @@ export function PromptButton({
   placeholderText = "Prompt",
   isLoading,
 }: {
-  onSubmit: (prompt?: string) => void;
+  onSubmit: (prompt: string) => void;
   buttonText: string;
   isLoading: boolean;
   placeholderText?: string;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = () => {
-    onSubmit(inputRef.current?.value);
+  const handleSubmit = (formData: FormData) => {
+    console.log("handle submit");
+    onSubmit(formData.get("prompt") as string);
+    formRef.current?.reset();
   };
 
   return (
-    <div className="flex w-full">
+    <form ref={formRef} className="flex w-full" action={handleSubmit}>
       <Input
-        ref={inputRef}
         className="h-auto! bg-white placeholder:italic rounded-lg! px-2! w-17! text-sm overflow-hidden transition-all duration-300 focus:bg-white focus:w-full! focus:flex"
         placeholder={placeholderText}
         autoComplete="off"
+        name="prompt"
       />
 
       <Button
-        onClick={handleSubmit}
+        type="submit"
         className="text-sm rounded-lg direction-normal ml-1.5 shrink-0 px-2! h-auto! border-none bg-neutral-400 hover:bg-neutral-500 active:bg-neutral-600 text-white"
       >
         {isLoading ? (
@@ -38,6 +40,6 @@ export function PromptButton({
         ) : null}
         {buttonText}
       </Button>
-    </div>
+    </form>
   );
 }
