@@ -155,7 +155,7 @@ export default function TopicCombobox({
             Témata
           </label>
           <Combobox.Chips
-            className="flex flex-wrap items-center gap-1 rounded-xl hover:bg-white focus-within:bg-white px-1.5 py-1 focus-within:outline-2 focus-within:-outline-offset-1 focus-within:outline-neutral-400 w-full"
+            className="flex flex-wrap items-center gap-1 rounded-xl hover:bg-neutral-50 focus-within:bg-white px-1.5 py-1 focus-within:outline-2 focus-within:-outline-offset-1 focus-within:outline-neutral-400 w-full"
             ref={containerRef}
           >
             <Combobox.Value>
@@ -164,12 +164,12 @@ export default function TopicCombobox({
                   {value.map((label) => (
                     <Combobox.Chip
                       key={label.id}
-                      className="flex items-center gap-1 rounded-lg bg-neutral-300/70 pl-1.5 pr-[0.2rem] py-[0.2rem] text-sm text-neutral-900 outline-none cursor-default [@media(hover:hover)]:[&[data-highlighted]]:bg-neutral-800 [@media(hover:hover)]:[&[data-highlighted]]:text-neutral-50 focus-within:bg-neutral-800 focus-within:text-neutral-50"
+                      className="flex items-center gap-1 rounded-lg bg-neutral-300 pl-1.5 pr-[0.2rem] py-[0.2rem] text-sm text-neutral-900 outline-none cursor-default [@media(hover:hover)]:[&[data-highlighted]]:bg-neutral-800 [@media(hover:hover)]:[&[data-highlighted]]:text-neutral-50 focus-within:bg-neutral-800 focus-within:text-neutral-50"
                       aria-label={label.value}
                     >
                       {label.value}
                       <Combobox.ChipRemove
-                        className="rounded-md px-1 py-1  hover:bg-neutral-300 text-neutral-500"
+                        className="rounded-md px-1 py-1  hover:bg-neutral-200 text-neutral-500"
                         aria-label="Remove"
                       >
                         <XIcon />
