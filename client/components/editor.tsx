@@ -1,4 +1,3 @@
-// import "../index.css";
 import type { Card, Patch } from "schema/verifier";
 import {
   ArrowDown,
@@ -7,7 +6,6 @@ import {
   ListIndentDecrease,
   Eye,
   Plus,
-  Cross,
   X,
 } from "lucide-react";
 import { Toggle } from "./toggle";
@@ -20,8 +18,9 @@ import clsx from "clsx";
 import EditorHeader from "./editor-header";
 import { Button } from "./button";
 import { PromptButton } from "./prompt-button";
-import { SourceEditor } from "./source-editor";
-import { fetchHttpStream, useAgent } from "lib/stream/hook";
+import { connection } from "lib/stream/index.client";
+import { useAgent } from "lib/stream/hook";
+//
 // A helper function to consistently initialize a task list.
 export function initCard(): Card {
   return {
@@ -54,7 +53,7 @@ export function CardEditor() {
   } = useVerifier();
 
   const { isLoading, error, status, sendToolAction } = useAgent({
-    connection: fetchHttpStream("http://localhost:8000/agent"),
+    connection,
     onChunk: (chunk) => {
       console.log("Received chunk:", chunk);
       applyPatch(chunk as unknown as Patch[]);

@@ -10,6 +10,7 @@ import {
   DocHandle,
 } from "@automerge/react";
 import { getOrCreateRoot, type RootDocument } from "rootDoc.client";
+import { type PublicEnv } from "types";
 
 console.log("ENTRY CLIENT LOADED");
 
@@ -20,13 +21,14 @@ declare global {
     repo: Repo;
     // We also add the handle to the global window object for debugging
     handle: DocHandle<RootDocument>;
+    ENV: PublicEnv["ENV"];
   }
 }
 
 const repo = new Repo({
   network: [
     new BroadcastChannelNetworkAdapter(),
-    new WebSocketClientAdapter("wss://sync.automerge.org"),
+    new WebSocketClientAdapter(window.ENV.SYNC_URL!),
   ],
   storage: new IndexedDBStorageAdapter(),
 });

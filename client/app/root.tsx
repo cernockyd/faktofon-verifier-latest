@@ -5,8 +5,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "react-router";
 
+import { type PublicEnv } from "types";
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -23,7 +25,17 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export function loader({ context }: Route.LoaderArgs) {
+  return Response.json({
+    ENV: {
+      AGENT_URL: process.env.AGENT_URL,
+      SYNC_URL: process.env.SYNC_URL,
+    },
+  } as PublicEnv);
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<PublicEnv>();
   return (
     <html lang="en">
       <head>
@@ -35,6 +47,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
+        <Scripts />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>

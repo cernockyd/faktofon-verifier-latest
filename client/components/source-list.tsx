@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 import type { CardStatement, Patch } from "schema/verifier";
 import { SourceEditor } from "./source-editor";
-import { fetchHttpStream, useAgent } from "lib/stream/hook";
-import { useEffect } from "react";
+import { useAgent } from "lib/stream/hook";
 import { PromptButton } from "./prompt-button";
+import { connection } from "lib/stream/index.client";
 
 export type Menus = {
   resource: Menu.MenuItemDefinition<ResourceMenuPayload>[];
@@ -54,7 +54,7 @@ export function SourceList({
     applyPatchChunk: applyPatch,
   } = useVerifier();
   const { isLoading, error, status, sendToolAction } = useAgent({
-    connection: fetchHttpStream("http://localhost:8000/agent"),
+    connection,
     onChunk: (chunk) => {
       console.log("Received chunk:", chunk);
       applyPatch(chunk as unknown as Patch[]);
