@@ -22,3 +22,6 @@ make build-agent
 ## Other
 
 - Use [Bruno](https://www.usebruno.com/) to experiment with the agent API.
+
+---
+Truth is a process, not a state.
