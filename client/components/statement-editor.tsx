@@ -129,9 +129,12 @@ export function StatementEditor({
                   statement={statement}
                 />
               )}
-              {statement.verification_analysis && (
-                <StatementVerificationAnalysis statement={statement} />
-              )}
+              {statement.verification_analysis &&
+                statement.verifiability_analysis &&
+                statement.verifiability_analysis.status?.status_code !=
+                  "not_verifiable_rhetorical_question" && (
+                  <StatementVerificationAnalysis statement={statement} />
+                )}
             </div>
           </div>
         </div>
