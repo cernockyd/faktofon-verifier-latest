@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from typing import TypedDict
 
 from langchain.chat_models import init_chat_model
+from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from src.schema import (
@@ -50,7 +51,7 @@ Proposition timeframe: {proposition_timeframe}
 
 Additional context: {additional_context}
 
-Source URL: {source_url}"""
+Source content: {source_content}"""
 
 
 class LLMAnalyseInformationSourceInput(TypedDict):
@@ -73,14 +74,22 @@ def llm_analyse_information_source(state: LLMAnalyseInformationSourceInput):
     """
     statement = state["statement"]
     verifiability_analysis = state["verifiability_analysis"]
-    if verifiability_analysis.data is None:
+    info_source = state["informational_source"]
+    if verifiability_analysis.data is None or info_source["url"] is None:
         return {"verification_list": []}
     context = state["statement_context"]
-    info_source = state["informational_source"]
     logging.info("Thread LLM call to verify statement")
 
     now_utc = datetime.now(timezone.utc)
     # timeframe_since = get_date_before_duration(now_utc, analysis.proposition_timeframe)
+
+    loader = UnstructuredURLLoader(urls=[info_source["url"]])
+    data = loader.load()
+    source_content = ""
+    if len(data) == 1:
+        source_content = data[0].page_content
+    else:
+        return {"verification_list": []}
 
     human_prompt = source_verification_prompt_template.format(
         global_proposition_context=context["card_title"],
@@ -94,7 +103,7 @@ def llm_analyse_information_source(state: LLMAnalyseInformationSourceInput):
         else "not specified",
         proposition=statement["text"],
         additional_context=" ".join(context["additional_context"]),
-        source_url=info_source["url"],
+        source_content=source_content,
     )
     structured_llm = llm.with_structured_output(SourceVerificationAnalysisResult)
     verification_res = structured_llm.invoke(
