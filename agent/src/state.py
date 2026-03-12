@@ -15,7 +15,7 @@ from src.schema import (
     CardStatementEnhanced,
     Message,
     StatementContext,
-    StatementVerifiabilityAnalysisResult,
+    StatementVerifiabilityAnalysisResultWrapped,
 )
 
 
@@ -31,6 +31,6 @@ class OveralState(TypedDict):
     ]
     recommended_blocks: Annotated[list[CardBlockReorderable], operator.add]
     statement: CardStatementEnhanced | None
-    verifiability_analysis: StatementVerifiabilityAnalysisResult | None
+    verifiability_analysis: StatementVerifiabilityAnalysisResultWrapped | None
     statement_context: StatementContext | None
     informational_source: CardSourceEnhanced | None

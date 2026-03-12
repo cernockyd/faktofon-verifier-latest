@@ -8,7 +8,7 @@ from src.schema import (
     CardStatementEnhanced,
     StatementContext,
     StatementVerifiabilityAnalysisResult,
-    StatementVerifiabilityAnalysisResultEnhanced,
+    StatementVerifiabilityAnalysisResultWrapped,
     StatementVerificationAnalysisEnhanced,
 )
 from src.validation import validate_statement_verifiability
@@ -37,7 +37,7 @@ class LLMAnalyseStatmentVerifiabilityInput(TypedDict):
 class LLMAnalyseStatmentVerifiabilityOutput(TypedDict):
     statement_context: StatementContext
     statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResultEnhanced
+    verifiability_analysis: StatementVerifiabilityAnalysisResultWrapped
     verification_analysis: NotRequired[StatementVerificationAnalysisEnhanced]
 
 
@@ -70,8 +70,8 @@ def llm_analyse_statement_verifiability(
 
     status = validate_statement_verifiability(analysis_res)
 
-    analysis_enhanced = StatementVerifiabilityAnalysisResultEnhanced(
-        **analysis_res.model_dump(),
+    analysis_enhanced = StatementVerifiabilityAnalysisResultWrapped(
+        data=analysis_res,
         status=status,
     )
     statement["verifiability_analysis"] = analysis_enhanced

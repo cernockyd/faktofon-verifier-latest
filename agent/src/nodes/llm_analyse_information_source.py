@@ -11,7 +11,7 @@ from src.schema import (
     SourceVerificationAnalysisResult,
     SourceVerificationAnalysisResultEnhanced,
     StatementContext,
-    StatementVerifiabilityAnalysisResult,
+    StatementVerifiabilityAnalysisResultWrapped,
 )
 from src.utils import format_duration
 from src.validation import validate_source_verification
@@ -55,14 +55,14 @@ Source URL: {source_url}"""
 
 class LLMAnalyseInformationSourceInput(TypedDict):
     statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
+    verifiability_analysis: StatementVerifiabilityAnalysisResultWrapped
     statement_context: StatementContext
     informational_source: CardSourceEnhanced
 
 
 class LLMAnalyseInformationSourceOutput(TypedDict):
     statement: CardStatementEnhanced
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
+    verifiability_analysis: StatementVerifiabilityAnalysisResultWrapped
     informational_source: CardSourceEnhanced
     verification: SourceVerificationAnalysisResultEnhanced
 
@@ -73,6 +73,8 @@ def llm_analyse_information_source(state: LLMAnalyseInformationSourceInput):
     """
     statement = state["statement"]
     verifiability_analysis = state["verifiability_analysis"]
+    if verifiability_analysis.data is None:
+        return {"verification_list": []}
     context = state["statement_context"]
     info_source = state["informational_source"]
     logging.info("Thread LLM call to verify statement")
@@ -86,9 +88,9 @@ def llm_analyse_information_source(state: LLMAnalyseInformationSourceInput):
         current_date=now_utc.strftime("%Y-%m-%d"),
         # format if not None
         proposition_timeframe=format_duration(
-            verifiability_analysis.proposition_timeframe
+            verifiability_analysis.data.proposition_timeframe
         )
-        if verifiability_analysis.proposition_timeframe
+        if verifiability_analysis.data.proposition_timeframe
         else "not specified",
         proposition=statement["text"],
         additional_context=" ".join(context["additional_context"]),

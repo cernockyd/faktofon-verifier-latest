@@ -1,12 +1,5 @@
 import { Collapsible } from "@base-ui/react/collapsible";
-import {
-  ChevronLeft,
-  ChevronRight,
-  CircleCheck,
-  CircleDashed,
-  Clock,
-  OctagonAlert,
-} from "lucide-react";
+import { ChevronRight, Clock } from "lucide-react";
 import type { ReactNode } from "react";
 
 export const formatPercentage = (decimal: number) => `${decimal * 100} %`;
@@ -15,7 +8,7 @@ export const formatBoolean = (value: boolean) => (value ? "ano" : "ne");
 import { Check, X, AlertTriangle, Loader2 } from "lucide-react";
 import clsx from "clsx";
 
-type Status = "success" | "error" | "warning" | "waiting";
+export type Status = "success" | "error" | "warning" | "waiting";
 
 export const StatusSummary = ({
   mainStatus,
@@ -68,7 +61,7 @@ type Formatter<T> = (value: T) => ReactNode;
 
 type TableKey<T> = {
   name: string;
-  hideTitle?: boolean;
+  hideTitle?: true;
   format: Formatter<T>;
 };
 
@@ -78,42 +71,61 @@ export const DataTable = ({
   data,
   triggerName,
   tableKeys,
+  pinnedKeys,
 }: {
   data?: any;
   triggerName: string;
   tableKeys: TableKeys;
+  pinnedKeys?: TableKeys;
 }) => {
   return (
     <Collapsible.Root className="">
       <Collapsible.Trigger
         disabled={!data ? true : false}
         className={clsx(
-          "group w-full flex items-center gap-2 bg-white pr-3 py-1.5 text-sm focus-visible:outline active:bg-neutral-100",
+          "group bg-white w-full pr-3 py-1.5 text-sm focus-visible:outline active:bg-neutral-100",
           {
             "pl-9": !data,
             "pl-3": data,
           },
         )}
       >
-        {data && (
-          <ChevronRight className="size-4 transition-all ease-out group-data-panel-open:rotate-90" />
-        )}
-        <span className="text-neutral-900 font-medium mr-auto shrink-0 pr-2">
-          {triggerName}
-        </span>
-        {data
-          ? tableKeys["status"].format(data["status"])
-          : tableKeys["status"].format(null)}
+        <div className="w-full flex items-center gap-2">
+          {data && (
+            <ChevronRight className="size-4 transition-all ease-out group-data-panel-open:rotate-90" />
+          )}
+          <span className="text-neutral-900 font-medium mr-auto shrink-0 pr-2">
+            {triggerName}
+          </span>
+          {data
+            ? tableKeys["status"].format(data["status"])
+            : tableKeys["status"].format(null)}
+        </div>
       </Collapsible.Trigger>
+      {data && pinnedKeys && (
+        <div className="pt-4 border-t border-neutral-300 pl-6 pr-3 bg-white pointer-events-auto">
+          {Object.entries(pinnedKeys).map(([key]) => (
+            <>{pinnedKeys[key].format(data[key])}</>
+          ))}
+        </div>
+      )}
       {data && (
         <Collapsible.Panel className="flex [&[hidden]:not([hidden='until-found'])]:hidden h-(--collapsible-panel-height) h-max-[500px] overflow-y-scroll border-t border-neutral-200 flex-col justify-end text-sm transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150">
           <div className="w-full pt-1 h-full pb-4 bg-neutral-100 text-left text-sm text-neutral-500">
             {Object.entries(tableKeys).map(([key]) => {
+              if (key == "separator" && tableKeys[key]) {
+                return <div className=""></div>;
+              }
               if (tableKeys[key].hideTitle) return null;
               return (
                 <div
                   key={key}
-                  className="grid group/row bg-neutral-100 pl-8 hover:bg-neutral-200 last:border-none border-neutral-200 grid-cols-12"
+                  className={clsx(
+                    "grid group/row bg-neutral-100 pl-8 last:border-none border-neutral-200 grid-cols-12",
+                    {
+                      "hover:bg-neutral-200": !tableKeys[key].ignoreHover,
+                    },
+                  )}
                 >
                   {!tableKeys[key].hideTitle && (
                     <div

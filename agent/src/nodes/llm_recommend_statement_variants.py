@@ -11,7 +11,7 @@ from src.schema import (
     CardStatementEnhanced,
     StatementContext,
     StatementVariantsRecommendationResult,
-    StatementVerifiabilityAnalysisResult,
+    StatementVerifiabilityAnalysisResultWrapped,
 )
 from src.utils import format_duration
 
@@ -38,7 +38,7 @@ User specification: {user_prompt}
 class LLMRecommendStatementVariantsInput(TypedDict):
     statement: CardStatementEnhanced
     prompt: str
-    verifiability_analysis: StatementVerifiabilityAnalysisResult
+    verifiability_analysis: StatementVerifiabilityAnalysisResultWrapped
     statement_context: StatementContext
 
 
@@ -57,6 +57,8 @@ def llm_recommend_statement_variants(
 ) -> LLMRecommendStatementVariantsOutput:
     statement = state["statement"]
     verifiability_analysis = statement.get("verifiability_analysis", None)
+    if verifiability_analysis is None:
+        return {"recommended_statement_variants": []}
     context = state["statement_context"]
     logging.info("Thread LLM call to recommend information source")
 
@@ -67,10 +69,10 @@ def llm_recommend_statement_variants(
         user_prompt=state["prompt"],
         current_date=now_utc.strftime("%Y-%m-%d"),
         proposition_timeframe=format_duration(
-            verifiability_analysis.proposition_timeframe
+            verifiability_analysis.data.proposition_timeframe
         )
-        if verifiability_analysis is not None
-        and verifiability_analysis.proposition_timeframe
+        if verifiability_analysis.data is not None
+        and verifiability_analysis.data.proposition_timeframe
         else "not specified",
         proposition=statement["text"],
         additional_context=" ".join(context["additional_context"]),

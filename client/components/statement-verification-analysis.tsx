@@ -34,8 +34,8 @@ const tableKeys: TableKeys = {
         <StatusSummary mainStatus={"waiting"} />
       ),
   },
-  sources_statistics: {
-    name: "Statistika zdrojů",
+  sources_supported_statistics: {
+    name: "Zdroje podporující tvrzení dle úrovně",
     format: (sources_statistics) => (
       <ul>
         {sources_statistics != null &&

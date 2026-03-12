@@ -56,19 +56,6 @@ class Interaction(TypedDict):
     rejected: bool
 
 
-class CardSource(TypedDict):
-    type: str | None
-    name: str | None
-    url: str | None
-    archive_url: str | None
-    date: str | None
-    verification: NotRequired[
-        "SourceVerificationAnalysisResult"
-    ]  # Populated during verification
-    verification_user_interaction: NotRequired[Interaction]
-    author_type: NotRequired[Literal["user", "agent"]]
-
-
 class InformationSourceRecommendationResult(BaseModel):
     # todo: restrict to HTTP/S URL only
     url: str = Field(
@@ -88,12 +75,6 @@ class InformationSourceRecommendationResult(BaseModel):
     )
 
 
-class CardSourceEnhanced(CardSource):
-    source_id: str
-    statement_id: str
-    block_id: str
-
-
 class Duration(BaseModel):
     years: int = Field(default=0, ge=0, description="Number of years")
     months: int = Field(default=0, ge=0, description="Number of months")
@@ -108,18 +89,14 @@ class SourcesLevelCount(TypedDict):
 
 
 class StatementVerificationAnalysis(TypedDict):
-    sources_statistics: SourcesLevelCount
+    sources_statistics: SourcesLevelCount | None
+    sources_supported_statistics: SourcesLevelCount | None
 
 
 class ProcessingState(TypedDict):
     error: bool
     success: bool
     loading: bool
-
-
-class SourcesReorderable(TypedDict):
-    order: list[str]
-    record: dict[str, CardSource]
 
 
 class StatementVerificationAnalysisStatus(TypedDict):
@@ -141,85 +118,74 @@ class StatementVerifiabilityAnalysisResult(BaseModel):
         default=None,
         description="The ideal timeframe of the proposition (an object with years, months, days, hours) denoting what is the ideal age of a resouce backing the proposition.",
     )
-    proposition_factual: float | None = Field(
-        default=None,
+    vagueness: float = Field(
+        ge=0,
+        le=1,
+        description="Is the statement hard to verify without treshold or definitions?",
+    )
+    context_dependency: float = Field(
+        ge=0,
+        le=1,
+        description="Does the statement require more context to verify?",
+    )
+    contains_ellipsis: float = Field(
+        ge=0,
+        le=1,
+        description="Does the statement lack part of the structure?",
+    )
+    ambiguity: float = Field(
+        ge=0,
+        le=1,
+        description="Is it hard to guess what should be verified?",
+    )
+    contains_implicit_content: float = Field(
+        ge=0,
+        le=1,
+        description="Does it rely on implicit information?",
+    )
+    is_interrogative: float = Field(
+        ge=0,
+        le=1,
+        description="Is the statement a interrogative question?",
+    )
+    is_rhetorical: float = Field(
+        ge=0,
+        le=1,
+        description="Is the statement a rhetorical question?",
+    )
+    is_assertion: float = Field(
+        ge=0,
+        le=1,
+        description="Is the statement declarative?",
+    )
+    proposition_verifiable_reasoning: str = Field(
+        min_length=50,
+        max_length=400,
+        description="Clear reasoning in Czech language on why the proposition is or isn't verifiable. Assume we have usual internet resouces at hand that can be used to verify the statement.",
+    )
+    proposition_verifiable: float = Field(
         ge=0,
         le=1,
         description="Is the proposition factual enough to be verified? The closer to 1, the more factual.",
     )
+    recommended_alternatives: list[str] = Field(
+        min_length=0,
+        max_length=3,
+        description="Write recommended alternatives in Czech language that are easier to read and verify.",
+    )
 
 
-class CardStatement(TypedDict):
-    text: str
-    sources: SourcesReorderable
-    emoji: NotRequired[str]
-    verifiability_analysis: NotRequired[StatementVerifiabilityAnalysisResult]
-    # verifiability_analysis_user_interaction: NotRequired[Interaction]
-    verification_analysis: NotRequired[StatementVerificationAnalysisEnhanced]
-    # verification_analysis_user_interaction: NotRequired[Interaction]
-    # expected: NotRequired[dict]  # can be refined if needed
-
-
-class CardStatementEnhanced(CardStatement):
-    statement_id: str
-    block_id: str
-
-
-class StatementsReorderable(TypedDict):
-    order: list[str]
-    record: dict[str, CardStatement]
-
-
-class CardBlock(TypedDict):
-    statements: StatementsReorderable
-
-
-class CardBlockReorderable(TypedDict):
-    order: list[str]
-    record: dict[str, CardBlock]
-
-
-class Card(TypedDict):
-    title: str
-    topics: list[str]  # at this point not reordeable
-    blocks: CardBlockReorderable
-
-
-# {"messages":[{"id":"msg-1772883664839-yw393d","role":"user","parts":[{"type":"action","action":"recommend_sources","payload":{"statement_id":"25fa2b34-d235-4ecd-b156-63c9e57bcb42"}}],"createdAt":"2026-03-07T11:41:04.839Z"}]
-
-
-class ActionMessagePartPayload(TypedDict):
-    statement_id: NotRequired[str]
-    prompt: NotRequired[str]
-
-
-class ActionMessagePart(TypedDict):
-    type: Literal["action"]
-    action: Literal[
-        "analyze",
-        "recommend_sources",
-        "recommend_statement_variants",
-        "recommend_statement",
-        "recommend_blocks",
+class StatementVerifiabilityAnalysisStatus(TypedDict):
+    status_code: Literal[
+        "verifiable", "not_verifiable", "not_verifiable_rhetorical_question"
     ]
-    payload: NotRequired[ActionMessagePartPayload]
+    messages: list[str]
+    errors: list[str]
 
 
-class Message(TypedDict):
-    id: NotRequired[str]
-    role: Literal["user"]  # ignoring others
-    parts: list[ActionMessagePart]  # ignoring other content types as well
-    createdAt: NotRequired[str]
-
-
-class AgentCardToolRequestData(TypedDict):
-    card: Card
-    conversationId: NotRequired[str]
-
-
-class AgentCardToolRequest(TypedDict):
-    messages: list[Message]
-    data: AgentCardToolRequestData
+class StatementVerifiabilityAnalysisResultWrapped(BaseModel):
+    status: StatementVerifiabilityAnalysisStatus | None
+    data: StatementVerifiabilityAnalysisResult | None
 
 
 class SourceVerificationAnalysisResult(BaseModel):
@@ -294,6 +260,105 @@ class SourceVerificationAnalysisResult(BaseModel):
     # )
 
 
+class CardSource(TypedDict):
+    type: str | None
+    name: str | None
+    url: str | None
+    archive_url: str | None
+    date: str | None
+    verification: NotRequired[
+        SourceVerificationAnalysisResult | None
+    ]  # Populated during verification
+    verification_user_interaction: NotRequired[Interaction | None]
+    author_type: NotRequired[Literal["user", "agent"]]
+
+
+class CardSourceEnhanced(CardSource):
+    source_id: str
+    statement_id: str
+    block_id: str
+
+
+class SourcesReorderable(TypedDict):
+    order: list[str]
+    record: dict[str, CardSource]
+
+
+class CardStatement(TypedDict):
+    text: str
+    sources: SourcesReorderable
+    emoji: NotRequired[str]
+    verifiability_analysis: NotRequired[
+        StatementVerifiabilityAnalysisResultWrapped | None
+    ]
+    # verifiability_analysis_user_interaction: NotRequired[Interaction]
+    verification_analysis: NotRequired[StatementVerificationAnalysisEnhanced | None]
+    # verification_analysis_user_interaction: NotRequired[Interaction]
+    # expected: NotRequired[dict]  # can be refined if needed
+
+
+class CardStatementEnhanced(CardStatement):
+    statement_id: str
+    block_id: str
+
+
+class StatementsReorderable(TypedDict):
+    order: list[str]
+    record: dict[str, CardStatement]
+
+
+class CardBlock(TypedDict):
+    statements: StatementsReorderable
+
+
+class CardBlockReorderable(TypedDict):
+    order: list[str]
+    record: dict[str, CardBlock]
+
+
+class Card(TypedDict):
+    title: str
+    topics: list[str]  # at this point not reordeable
+    blocks: CardBlockReorderable
+
+
+# {"messages":[{"id":"msg-1772883664839-yw393d","role":"user","parts":[{"type":"action","action":"recommend_sources","payload":{"statement_id":"25fa2b34-d235-4ecd-b156-63c9e57bcb42"}}],"createdAt":"2026-03-07T11:41:04.839Z"}]
+
+
+class ActionMessagePartPayload(TypedDict):
+    statement_id: NotRequired[str]
+    prompt: NotRequired[str]
+
+
+class ActionMessagePart(TypedDict):
+    type: Literal["action"]
+    action: Literal[
+        "analyze",
+        "recommend_sources",
+        "recommend_statement_variants",
+        "recommend_statement",
+        "recommend_blocks",
+    ]
+    payload: NotRequired[ActionMessagePartPayload]
+
+
+class Message(TypedDict):
+    id: NotRequired[str]
+    role: Literal["user"]  # ignoring others
+    parts: list[ActionMessagePart]  # ignoring other content types as well
+    createdAt: NotRequired[str]
+
+
+class AgentCardToolRequestData(TypedDict):
+    card: Card
+    conversationId: NotRequired[str]
+
+
+class AgentCardToolRequest(TypedDict):
+    messages: list[Message]
+    data: AgentCardToolRequestData
+
+
 class BlockRecommendationResultParagraph(BaseModel):
     block: list[str] = Field(
         min_length=1,
@@ -321,18 +386,6 @@ class SourceVerificationAnalysisStatus(TypedDict):
 
 class SourceVerificationAnalysisResultEnhanced(SourceVerificationAnalysisResult):
     status: SourceVerificationAnalysisStatus
-
-
-class StatementVerifiabilityAnalysisStatus(TypedDict):
-    status_code: Literal["verifiable", "not_verifiable"]
-    messages: list[str]
-    errors: list[str]
-
-
-class StatementVerifiabilityAnalysisResultEnhanced(
-    StatementVerifiabilityAnalysisResult
-):
-    status: StatementVerifiabilityAnalysisStatus
 
 
 class Patch(BaseModel):  # using BaseModel to allow model_dump_json()

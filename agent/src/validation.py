@@ -14,11 +14,10 @@ def validate_statement_verifiability(
     messages = []
     errors = []
     status_code = "not_verifiable"
-    if (
-        verifiability_analysis.proposition_factual is not None
-        and verifiability_analysis.proposition_factual >= 0.85
-    ):
+    if verifiability_analysis.proposition_verifiable >= 0.85:
         status_code = "verifiable"
+    if verifiability_analysis.is_rhetorical >= 0.85:
+        status_code = "not_verifiable_rhetorical_question"
     return {
         "status_code": status_code,
         "messages": messages,
@@ -53,10 +52,10 @@ def validate_statement_verification(
     messages = []
     errors = []
     minimum_source_type_count_met = False
-    source_stats = verification_analysis["sources_statistics"]
-
-    if source_stats["primary"] >= 1 or source_stats["secondary"] >= 2:
-        minimum_source_type_count_met = True
+    source_stats = verification_analysis["sources_supported_statistics"]
+    if source_stats is not None:
+        if source_stats["primary"] >= 1 or source_stats["secondary"] >= 2:
+            minimum_source_type_count_met = True
 
     # todo: check source verification as well
 

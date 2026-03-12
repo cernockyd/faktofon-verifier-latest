@@ -23,9 +23,23 @@ export const StatementVerifiabilityStatus = z.object({
 });
 
 export const StatementVerifiabilityAnalysisResultSchema = z.object({
-  status: StatementVerifiabilityStatus,
-  proposition_timeframe: DurationSchema.nullable().optional(),
-  proposition_factual: z.boolean().nullable().optional(),
+  status: StatementVerifiabilityStatus.nullable(),
+  data: z
+    .object({
+      proposition_timeframe: DurationSchema.nullable().optional(),
+      vagueness: z.number(),
+      context_dependency: z.number(),
+      contains_ellipsis: z.number(),
+      ambiguity: z.number(),
+      contains_implicit_content: z.number(),
+      is_interrogative: z.number(),
+      is_rhetorical: z.number(),
+      is_assertion: z.number(),
+      proposition_verifiable_reasoning: z.string(),
+      proposition_verifiable: z.number(),
+      recommended_alternatives: z.string().array(),
+    })
+    .nullable(),
 });
 
 export type StatementVerifiabilityAnalysisResult = z.infer<
@@ -38,15 +52,16 @@ export const StatementVerificationStatus = z.object({
   errors: z.string().array(),
 });
 
+export const SourcesStatistics = z.object({
+  primary: z.number().int().default(0),
+  secondary: z.number().int().default(0),
+  terciary: z.number().int().default(0),
+});
+
 export const StatementVerificationAnalysisSchema = z.object({
   status: StatementVerificationStatus,
-  sources_statistics: z
-    .object({
-      primary: z.number().int().default(0),
-      secondary: z.number().int().default(0),
-      terciary: z.number().int().default(0),
-    })
-    .nullable(),
+  sources_statistics: SourcesStatistics.nullable(),
+  sources_supported_statistics: SourcesStatistics.nullable(),
 });
 
 export type StatementVerificationAnalysis = z.infer<

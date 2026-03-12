@@ -62,7 +62,7 @@ export function StatementEditor({
   return (
     <>
       <div className="w-full contents">
-        <div className="group/statement">
+        <div className="group/statement contents">
           <div className="text-neutral-500 mt-3 text-sm font-mono">
             {statementIndex == 0 ? "Hlavní tvrzení" : "Doplňující tvrzení"}
           </div>
@@ -123,7 +123,11 @@ export function StatementEditor({
             )}
             <div className="rounded-xl mt-4 overflow-hidden divide-y divide-neutral-200">
               {statement.verifiability_analysis && (
-                <StatementVerifiablityAnalysis statement={statement} />
+                <StatementVerifiablityAnalysis
+                  blockId={blockId}
+                  statementId={statementId}
+                  statement={statement}
+                />
               )}
               {statement.verification_analysis && (
                 <StatementVerificationAnalysis statement={statement} />

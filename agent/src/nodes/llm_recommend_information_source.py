@@ -58,6 +58,9 @@ def llm_recommend_information_source(state: LLMRecommendInformationSourceInput):
     """
     statement = state["statement"]
     verifiability_analysis = statement.get("verifiability_analysis", None)
+    if verifiability_analysis is None:
+        return {"recommended_sources": []}
+    verifiability_analysis_data = verifiability_analysis.data
     context = state["statement_context"]
     logging.info("Thread LLM call to recommend information source")
 
@@ -68,10 +71,10 @@ def llm_recommend_information_source(state: LLMRecommendInformationSourceInput):
         user_prompt=state["prompt"],
         current_date=now_utc.strftime("%Y-%m-%d"),
         proposition_timeframe=format_duration(
-            verifiability_analysis.proposition_timeframe
+            verifiability_analysis_data.proposition_timeframe
         )
-        if verifiability_analysis is not None
-        and verifiability_analysis.proposition_timeframe
+        if verifiability_analysis_data is not None
+        and verifiability_analysis_data.proposition_timeframe
         else "not specified",
         proposition=statement["text"],
         additional_context=" ".join(context["additional_context"]),

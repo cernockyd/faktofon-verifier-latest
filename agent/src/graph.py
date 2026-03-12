@@ -36,11 +36,10 @@ from src.nodes.llm_recommend_information_source import (
 from src.schema import (
     AgentCardToolRequest,
     Card,
-    CardBlock,
     CardBlockReorderable,
     Patch,
     SourceVerificationAnalysisResult,
-    StatementVerifiabilityAnalysisResult,
+    StatementVerifiabilityAnalysisResultWrapped,
 )
 from src.state import OveralState
 from src.utils import new_record_patch
@@ -99,7 +98,8 @@ def reconstruct_verified_card(
         dict[
             str,
             tuple[
-                StatementVerifiabilityAnalysisResult, SourceVerificationAnalysisResult
+                StatementVerifiabilityAnalysisResultWrapped,
+                SourceVerificationAnalysisResult,
             ],
         ],
     ] = {}
@@ -135,7 +135,12 @@ def reconstruct_verified_card(
                 and verification_lookup[statement_id]
             ):
                 analysis = next(iter(verification_lookup[statement_id].values()))[0]
-                statement["verifiability_analysis"] = analysis
+                # statement["verifiability_analysis"] = analysis
+                statement["verifiability_analysis"] = (
+                    StatementVerifiabilityAnalysisResultWrapped(
+                        data=analysis.data, status=None
+                    )
+                )
 
             for source_id in statement["sources"]["order"]:
                 source = statement["sources"]["record"][source_id]

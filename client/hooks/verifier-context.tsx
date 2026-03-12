@@ -111,6 +111,11 @@ type VerifierContextType = {
     type: string | null,
   ) => void;
   editorViewRef: React.RefObject<HTMLDivElement | null>;
+  setRecommendedStatement: (
+    blockId: string,
+    statementId: string,
+    statement: string,
+  ) => void;
 };
 
 const VerifierContext = createContext<VerifierContextType | undefined>(
@@ -493,6 +498,27 @@ export const VerifierProvider = ({
     });
   }
 
+  function setRecommendedStatement(
+    blockId: string,
+    statementId: string,
+    statement: string,
+  ) {
+    changeDoc((d) => {
+      const stmt = d.blocks.record[blockId].statements.record[statementId];
+      stmt.text = statement;
+      if (stmt.verifiability_analysis) {
+        stmt.verifiability_analysis = {
+          status: null,
+          data: null,
+        };
+      }
+      if (stmt.verification_analysis) stmt.verification_analysis = null;
+      stmt.sources.order.forEach((sourceId) => {
+        stmt.sources.record[sourceId].verification = null;
+      });
+    });
+  }
+
   return (
     <VerifierContext.Provider
       value={{
@@ -528,6 +554,7 @@ export const VerifierProvider = ({
         reorderBlock,
         reorderSource,
         editorViewRef,
+        setRecommendedStatement,
       }}
     >
       {children}
