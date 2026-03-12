@@ -116,38 +116,39 @@ export function StatementVerifiablityAnalysis({
           <StatusSummary mainStatus={"waiting"} />
         )}
       </DataTable.Trigger>
-      {data && ["verifiable"].includes(analysis_status?.status_code || "") && (
-        <DataTable.Pinned>
-          <div>
-            <div className="flex gap-4 justify-between">
-              <p className="font-medium mb-2 text-sm text-neutral-800">
-                Doporučené alternativy
-              </p>
-              <span className="text-sm text-neutral-500">
-                Doporučení se mohou mýlit.
-              </span>
-            </div>
-            <ul className="list-style-none pb-4 grid gap-2 grid-cols-3">
-              {data.recommended_alternatives?.map((statement, i) => (
-                <li
-                  key={i}
-                  className="gap-1 flex flex-col justify-between text-sm hover:[&>button]:bg-blue-400 hover:[&>button]:text-white items-end rounded-xl pl-3 pr-2 py-1.5 text-neutral-900 bg-neutral-200/70 hover:bg-blue-200/70 mb-1"
-                >
-                  {statement}
-                  <Button
-                    onClick={() =>
-                      setRecommendedStatement(blockId, statementId, statement)
-                    }
-                    className="rounded-lg border-none bg-neutral-300 hover:bg-blue-500! hover:text-white px-2! py-0! text-sm! h-7!"
+      {data &&
+        ["not_verifiable"].includes(analysis_status?.status_code || "") && (
+          <DataTable.Pinned>
+            <div>
+              <div className="flex gap-4 justify-between">
+                <p className="font-medium mb-2 text-sm text-neutral-800">
+                  Doporučené alternativy
+                </p>
+                <span className="text-sm text-neutral-500">
+                  Doporučení se mohou mýlit.
+                </span>
+              </div>
+              <ul className="list-style-none pb-4 grid gap-2 grid-cols-3">
+                {data.recommended_alternatives?.map((statement, i) => (
+                  <li
+                    key={i}
+                    className="gap-1 flex flex-col justify-between text-sm hover:[&>button]:bg-blue-400 hover:[&>button]:text-white items-end rounded-xl pl-3 pr-2 py-1.5 text-neutral-900 bg-neutral-200/70 hover:bg-blue-200/70 mb-1"
                   >
-                    Použít
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </DataTable.Pinned>
-      )}
+                    {statement}
+                    <Button
+                      onClick={() =>
+                        setRecommendedStatement(blockId, statementId, statement)
+                      }
+                      className="rounded-lg border-none bg-neutral-300 hover:bg-blue-500! hover:text-white px-2! py-0! text-sm! h-7!"
+                    >
+                      Použít
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </DataTable.Pinned>
+        )}
       {data && (
         <DataTable.Panel>
           {Object.entries(tableKeys).map(([key]) => {
